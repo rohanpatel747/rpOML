@@ -82,6 +82,7 @@ out.units.c   = "km/s";
 disp('- - - Caution - - -')
 disp('SMA and T taken from Curtis');
 disp('Mercury and Moon Info Not Given by Professor');
+disp('- - - - - - - - - -')
 disp(' ');
 end
 
