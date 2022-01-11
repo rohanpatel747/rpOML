@@ -17,7 +17,7 @@ Library designed around CU Boulder's ASEN5050 and ASEN6008 courses.
 
 Note: Step (2) will clear the CSPICE kernal and reinitialze it everytime it is called. Consider this when attempting to use "rpOMLstart();" in functions or subroutines. 
 
-Examples of commonly used functions are shown in the "examples.m" script file.
+Examples of commonly used functions are shown in the "_examples.m" script file.
 
 
 ## Library Contents
