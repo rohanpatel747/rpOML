@@ -1,8 +1,6 @@
-function rpOMLstart(varargin)
+function rpOMLstart()
 %RPOMLSTART Initialize rpOMLibrary
-%   Inputs:
-%       1. isMac       (Bool) Macbook Pro Paths
-%       2. verboseMode (Bool) Start Library in Debug Mode
+%   Inputs (none)
 %   Paths/Variable Inputs:
 %       1. deVersion  (./jpl/spk/) Planetary Ephemeris BSP
 %          Download Latest Here: https://naif.jpl.nasa.gov/pub/naif/generic_kernels/spk/planets/
@@ -20,21 +18,16 @@ function rpOMLstart(varargin)
 
 %% INPUTS
 % Planetary SPK and Constants Versions
-deVersion = '440';
-pckVersion= '10';
-tlsVersion= '12';
+deVersion = '440';  % cooresponds to (de440.bsp)
+pckVersion= '10';   % cooresponds to (naif0010.tls)
+tlsVersion= '12';   % cooresponds to (pck00012.tpc)
 
 % Required Paths
-switch nargin   
-    case 1
-        isMac = varargin{1};
-end
-
-if isMac
+if ismac
     libDir = '/Users/rohan/dev/git/mice/';
     miceDir= '/Users/rohan/dev/jpl/mice/';
     spkDir = '/Users/rohan/dev/jpl/rpOML/';
-else
+elseif ispc
     libDir = 'C:\Users\rohan\dev\git\rpOML\';
     miceDir= 'C:\Users\rohan\dev\jpl\mice\';
     spkDir = 'C:\Users\rohan\dev\jpl\spk\';
