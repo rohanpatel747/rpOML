@@ -9,10 +9,10 @@ Library designed around CU Boulder's ASEN5050 and ASEN6008 courses.
 1. Clone the following repository
 2. Download JPL's NAIF CSPICE MICE Toolkit found [here](https://naif.jpl.nasa.gov/naif/toolkit.html).
 3. Extract the "/mice/" folder from Step (2) anywhere you'd like. This folder contains the entire toolkit.
-5. Open the "rpOMLstart_copy.m" file and follow the instructions on downloading NAIF data files, setting data file versions, and paths for the library.
+5. Open the "rpOMLstart.m" file and follow the instructions on downloading NAIF data files, setting data file versions, and paths for the library.
 
 ## Using the Library
-1. Copy/Paste "rpOMLstart_copy.m" to your project's working directory and rename it to "rpOMLstart.m"
+1. Copy/Paste "rpOMLstart.m" to your project's working directory and rename it to "rpOMLstart.m"
 2. At the beginning of your script add the line: rpOMLstart();
 
 Note: Step (2) will clear the CSPICE kernal and reinitialze it everytime it is called. Consider this when attempting to use "rpOMLstart();" in functions or subroutines. 
