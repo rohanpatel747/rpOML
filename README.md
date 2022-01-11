@@ -22,7 +22,8 @@ Examples of commonly used functions are shown in the "examples.m" script file.
 ### Scripts
 | Name | Description |
 | ----------- | ----------- |
-| ./LVPerf.m  | Various Launch Vehicle Curves (C3 versus Payload Mass)
+| ./LVPerf.m  | Various Launch Vehicle Curves (C3 versus Payload Mass) |
+| ./PorkchopPlotSPICE.m | Create porkchop plot between 2 CSPICE bodies *(currently requires Lambert alg. from David Eagle found in Matlab File Exchange)* |
 
 ### Functions
 | Name | Description |
