@@ -1,6 +1,8 @@
 # rpOML
 ## Orbital Mechanics Library
-
+C: 11JAN22  <br />
+**NOTE: This library is a work in progress and will be frequently updated** <br />
+Library designed around CU Boulder's ASEN5050 and ASEN6008 courses.
 
 
 ## Installation
