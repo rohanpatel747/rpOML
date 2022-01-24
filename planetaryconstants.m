@@ -26,7 +26,7 @@ out.muPluto = 8.71e2;
 % Planetary Radii (km)
 out.rMercury = 2440;
 out.rVenus   = 6051.8;
-out.rEarth   = 6378.14;
+out.rEarth   = 6378.1363;
 out.rLuna    = 1737;
 out.rMars    = 3396.19;
 out.rJupiter = 71492;
@@ -39,9 +39,9 @@ out.rPluto   = 1188.3;
 % Planetary Orbit Semi-Major Axis (km)
 out.smaMercury = 57.91e6;
 out.smaVenus   = 108.2e6;
-out.smaEarth   = 149.6e6;
+out.smaEarth   = 1.00*out.aukm;
 out.smaLuna    = 384.4e3;
-out.smaMars    = 227.9e6;
+out.smaMars    = 1.52368*out.aukm;
 out.smaJupiter = 778.6e6;
 out.smaSaturn  = 1.433e9;
 out.smaUranus  = 2.872e9;

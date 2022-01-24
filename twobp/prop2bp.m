@@ -56,7 +56,7 @@ tic
             legend({'Central Body','Orbit','Ecc. Vector','Nodes Vector'},'fontsize',14,'location','southeast')
         end
         h = drawCircle(0,0,rcb);
-        hold off
+        %hold off
         xlabel('x (km)')
         ylabel('y (km)')
         axis equal
