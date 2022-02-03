@@ -1,9 +1,9 @@
-%% Examples of Using rpOML and CSPICE Mice
+%% rpOML Examples - General Constants and States
 clear; close all; clc; format long; rpOMLstart();
 
 
 % Get Planetary Constants Data
-pcd = planetaryconstants();
+pcd = constants();
 
 
 
@@ -14,20 +14,22 @@ r_xyz = [7000; 7000; 0];
 v_xyz = [0; 0; 8];
 xi    = [r_xyz;v_xyz];
 
-fX1 = create_state(xi, pcd.muEarth, 'rv');
+fX1 = create_state(xi, pcd.Earth.mu, 'rv');
+
+
 
 fX2 = fX1;
 fX2.ta = pi/4;
 fX2.changed = 'aeiowta';
-fX2 = create_state(fX2, pcd.muEarth, 'fullX', true, false);
+fX2 = create_state(fX2, pcd.Earth.mu, 'fullX', true, false);
 
 
 
 
 
 % Example: Integrate EOMs & Plot Result
-[t,stateX] = prop2bp(fX2, [0 3600], pcd.rEarth, 'given');
-fX3 = create_state(stateX(end,:).', pcd.muEarth, 'rv');
+[t,stateX] = prop2bp(fX2, [0 3600], pcd.Earth.r, 'given');
+fX3 = create_state(stateX(end,:).', pcd.Earth.mu, 'rv');
 
 
 

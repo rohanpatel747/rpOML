@@ -18,7 +18,7 @@ arrbdy = '4';                   % NAIF Body ID of arrival body (4=Mars)
 % Days and Bounds
 et1 = cspice_str2et( {'Jul 01, 2020', 'Feb 28, 2021'} );
 et2 = et1;
-num_of_Pts = 1000;
+num_of_Pts = 2;
 dvmaxd = 10;
 dvmaxa = 15;
 
@@ -32,8 +32,8 @@ dvmaxa = 15;
 %% Lambert Calculation
 tic
 addpath(genpath(DELC));
-pcd = planetaryconstants();
-mu = pcd.muSun;
+pcd = constants();
+mu = pcd.Sun.mu;
 
 % cspice_etcal(number) <-- conv to UTC date/time
 t1 = (0:num_of_Pts-1) * ( et1(2) - et1(1) )/num_of_Pts + et1(1);
