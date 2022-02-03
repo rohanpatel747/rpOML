@@ -24,9 +24,9 @@ tlsVersion= '12';   % cooresponds to (pck00012.tpc)
 
 % Required Paths
 if ismac
-    libDir = '/Users/rohan/dev/git/mice/';
+    libDir = '/Users/rohan/dev/git/rpOML/';
     miceDir= '/Users/rohan/dev/jpl/mice/';
-    spkDir = '/Users/rohan/dev/jpl/rpOML/';
+    spkDir = '/Users/rohan/dev/jpl/spk/';
 elseif ispc
     libDir = 'C:\Users\rohan\dev\git\rpOML\';
     miceDir= 'C:\Users\rohan\dev\jpl\mice\';
