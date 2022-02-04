@@ -18,7 +18,7 @@ arrbdy = '4';                   % NAIF Body ID of arrival body (4=Mars)
 % Days and Bounds
 et1 = cspice_str2et( {'Jul 01, 2020', 'Feb 28, 2021'} );
 et2 = et1;
-num_of_Pts = 2;
+num_of_Pts = 250;
 dvmaxd = 10;
 dvmaxa = 15;
 
