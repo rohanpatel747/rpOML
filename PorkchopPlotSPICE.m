@@ -5,8 +5,8 @@ clear; close all; clc; format long g; rpOMLstart();
 %% Inputs
 
 % David Eagle's Lambert Code Folder Path:
-%DELC = '/Users/rohan/dev/mathworks_FileExchange/davideagle_lambert/';       % MACOS   Path 
-DELC = 'C:\Users\rohan\dev\mathworks_FileExchange\davideagle_lambert';       % Windows Path
+DELC = '/Users/rohan/dev/mathworks_FileExchange/davideagle_lambert/';       % MACOS   Path 
+%DELC = 'C:\Users\rohan\dev\mathworks_FileExchange\davideagle_lambert';       % Windows Path
 
 plt = 1;    % 1=Plot Porkchop
 
@@ -16,13 +16,14 @@ arrbdy = '4';                   % NAIF Body ID of arrival body (4=Mars)
 [ctr_bdy] = mice_bodc2n(0);     % <-- 0=Sun
 
 % Days and Bounds
-et1 = cspice_str2et( {'Jul 01, 2020', 'Feb 28, 2021'} );
+et1 = cspice_str2et( {'Jun 04, 2005', 'Feb 20, 2007'} );
 et2 = et1;
-num_of_Pts = 250;
+num_of_Pts = 1000;
 dvmaxd = 10;
 dvmaxa = 15;
 
 
+dispC3 = true;
 
 
 
@@ -91,6 +92,13 @@ if plt==1
     end
 
     hold on
+    
+    
+    if dispC3
+       vimag = vimag.^2; 
+    end
+    
+    
     [c1,h1] = contour(t1days,t2days,vimag',8,'b');
     clabel(c1,h1,'fontname','courier new','color','b');
     %colorbar

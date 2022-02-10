@@ -36,6 +36,23 @@ function [out] = conv_state2ele(xi,mu,displayOut)
     E = ((norm(v_)^2)/2) - mu/norm(r_);
     p = a*(1-emag^2);
     
+    
+    if isnan(omega)
+        disp(' ');
+        disp('* * * C A U T I O N * * *')
+        disp('    RAAN is NaN. Value set to 0.00 instead.')
+        omega = 0.000;
+    end
+    
+    if isnan(w)
+        disp('    Argument of Periapsis is NaN. Value set to 0.00 instead.')
+        disp(' ');
+        disp(' ');
+        w = 0.000;
+    end
+    
+    
+    
     if displayOut
         disp('-------------------------------------------')
         disp('Input State Vector: [x;y;z;vx;vy;vz]')
