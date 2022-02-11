@@ -17,7 +17,7 @@ function f = pkchp_plt(in)
 
 
     f = figure();
-    set(gcf,'color','w');
+    set(gcf,'color','w'); box on;
     % Plot Contours of C3, Vinf, and TOF
     hold on
     [C1, H1] = contour(dp1, dp2, c3dep  , ctr1, 'r','ShowText','on');
