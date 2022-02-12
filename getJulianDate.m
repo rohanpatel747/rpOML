@@ -1,5 +1,5 @@
 function jd = getJulianDate(d)
-%LAMBERTNREV Get Julian Date using built-in MATLAB function
+%GETJULIANDATE Get Julian Date using built-in MATLAB function
 %
 %   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 %   Inputs:
