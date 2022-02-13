@@ -21,7 +21,7 @@ function out = lambert0rev(sv1, sv2, dt, mu)
 %       3. Vallado "Fundamentals of Astrodynamics and Applications"
 %   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 %   TODO:
-%       1. Itteration counter to prematurely terminate the solver if
+%       1. Iteration counter to prematurely terminate the solver if
 %          solution cannot be found
 %
 %
