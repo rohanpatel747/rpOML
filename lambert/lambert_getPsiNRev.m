@@ -7,7 +7,7 @@ function [psiL, psiU] = lambert_getPsiNRev(n)
 %   Inputs:
 %       1. n     [1x1]        Number of Revolutions
 %   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-%   Output: out structure containing fields:
+%   Output:
 %       1. psiL  [1x1]        Lower Bound of Psi
 %       2. psiU  [1x1]        Upper Bound of Psi
 %   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

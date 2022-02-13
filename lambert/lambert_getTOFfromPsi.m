@@ -8,7 +8,7 @@ function tof = lambert_getTOFfromPsi(psi, sv1, sv2, mu)
 %       3. sv2 [6x1]or[3x1] Final   State or Position Vector (km)
 %       4. mu  [1x1]        Central Body Gravitational Parameter (km3/s2)
 %   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-%   Output: out structure containing fields:
+%   Output:
 %       1. tof [1x1]        Time of Flight (s)
 %   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 %   References:

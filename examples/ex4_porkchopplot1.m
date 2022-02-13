@@ -1,6 +1,6 @@
 %% rpOML Examples - Porkchop Plot Between Earth and Mars (1)
 clear; clc; format long g; rpOMLstart();
-
+tic
 %% Overview
 % This script is intended to show how to use the porkchop generation and
 % plotting functions in the library.
@@ -37,3 +37,4 @@ in.ntof = 15;                                           % # of TOF Contours
 %% Run Porkchop Plotting Algorithm and Plot Results
 out  = pkchp_porkchop(in);
 plt1 = pkchp_plt(out);
+toc

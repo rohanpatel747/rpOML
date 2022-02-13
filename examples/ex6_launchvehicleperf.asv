@@ -1,0 +1,11 @@
+%% rpOML Examples - Launch Vehicle Performance
+clear; clc; format long g; rpOMLstart();
+tic
+%% Overview
+% This script is intended to show how to use the launch vehicle performance
+% function.
+
+% Credit to Dr. Gregory Lantoine and Jo
+
+
+%% Problem Setup

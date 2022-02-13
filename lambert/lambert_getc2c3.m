@@ -5,7 +5,7 @@ function [c2,c3] = lambert_getc2c3(psi)
 %   Inputs:
 %       1. psi [1x1]        Transfer Universal Variable (radians)
 %   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-%   Output: out structure containing fields:
+%   Output:
 %       1. c2  [1x1]        C2 Parameter
 %       2. c3  [1x1]        C3 Parameter
 %   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
