@@ -20,7 +20,12 @@ function out = lambert0rev(sv1, sv2, dt, mu)
 %       2. Bate, Muller, and White "Fundamentals of Astrodynamics"
 %       3. Vallado "Fundamentals of Astrodynamics and Applications"
 %   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+%   TODO:
+%       1. Itteration counter to prematurely terminate the solver if
+%          solution cannot be found
 %
+%
+
     r0_ = sv1(1:3); r0 = norm(r0_);
     rf_ = sv2(1:3); rf = norm(rf_);
     
@@ -47,11 +52,11 @@ function out = lambert0rev(sv1, sv2, dt, mu)
 
         c2   = 1/2;
         c3   = 1/6;
-        phi  = 0;
-        phiU = 4*pi^2;
-        phiL = -4*pi;
+        psi  = 0;
+        psiU = 4*pi^2;
+        psiL = -4*pi;
 
-        y = r0 + rf + ((A*(phi*c3 - 1))/sqrt(c2));
+        y = r0 + rf + ((A*(psi*c3 - 1))/sqrt(c2));
         xi = sqrt(y/c2);
         dti = ((xi^3)*c3 + A*sqrt(y))/(sqrt(mu));
 
@@ -59,12 +64,12 @@ function out = lambert0rev(sv1, sv2, dt, mu)
 
         while abs(dti-dt) > 1e-5
 
-            y = r0 + rf + ((A*(phi*c3 - 1))/sqrt(c2));
+            y = r0 + rf + ((A*(psi*c3 - 1))/sqrt(c2));
 
             if (A>0.00) && (y<0.0)
-                phi = N*(1/c3)*(1 - ((sqrt(c2)/A)*(r0+rf)));
-                [c2, c3] = getc2c3(phi);
-                y = r0 + rf + ((A*(phi*c3 - 1))/sqrt(c2));
+                psi = N*(1/c3)*(1 - ((sqrt(c2)/A)*(r0+rf)));
+                [c2,c3] = lambert_getc2c3(psi);
+                y = r0 + rf + ((A*(psi*c3 - 1))/sqrt(c2));
             end
 
             xi = sqrt(y/c2);
@@ -73,14 +78,14 @@ function out = lambert0rev(sv1, sv2, dt, mu)
 
 
             if dti <= dt
-                phiL = phi;
+                psiL = psi;
             else
-                phiU = phi;
+                psiU = psi;
             end
 
 
-            phi = (phiU + phiL)/2;
-            [c2, c3] = getc2c3(phi);
+            psi = (psiU + psiL)/2;
+            [c2,c3] = lambert_getc2c3(psi);
 
         end
 
@@ -102,17 +107,17 @@ function out = lambert0rev(sv1, sv2, dt, mu)
     out.vf = vf;
     
 
-    function [c2, c3] = getc2c3(phi)
-        if phi > 1e-6
-            c2 = (1.0-cos(sqrt(phi)))/phi;
-            c3 = (sqrt(phi)-sin(sqrt(phi)))/sqrt(phi^3);
-        elseif phi < -1e-6
-            c2 = (1.0-cosh(sqrt(-phi)))/phi;
-            c3 = (sinh(sqrt(-phi)) - sqrt(-phi))/(sqrt((-phi)^3));
-        else
-            c2 = 1/2;
-            c3 = 1/6;
-        end
-    end
+%     function [c2, c3] = getc2c3(psi)
+%         if psi > 1e-6
+%             c2 = (1.0-cos(sqrt(psi)))/psi;
+%             c3 = (sqrt(psi)-sin(sqrt(psi)))/sqrt(psi^3);
+%         elseif psi < -1e-6
+%             c2 = (1.0-cosh(sqrt(-psi)))/psi;
+%             c3 = (sinh(sqrt(-psi)) - sqrt(-psi))/(sqrt((-psi)^3));
+%         else
+%             c2 = 1/2;
+%             c3 = 1/6;
+%         end
+%     end
 
 end
