@@ -1,5 +1,5 @@
 function [F,ta] = kepHypAnomaly(Mh, e, tol)
-%KEPHYPANOMALY Itterative Process to find F and theta given Mh and e
+%KEPHYPANOMALY Iterative Process to find F and theta given Mh and e
 %   Inputs
 %       Mh = Mean Hyperbolic Anomaly
 %       e  = Eccentricity

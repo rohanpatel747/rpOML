@@ -1,5 +1,5 @@
 function [E,ta] = kepElipAnomaly(M, e)
-%PROPKEPELIP Newton Itterative Process to find F and theta given Mh and e
+%PROPKEPELIP Newton Iterative Process to find F and theta given Mh and e
 %   Inputs:
 %       M  = Mean Anomaly (rads)
 %       e  = Eccentricity (n/a)

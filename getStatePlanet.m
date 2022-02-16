@@ -10,7 +10,7 @@ function out = getStatePlanet(ID, JDE, method)
 %       3. method   [str]  (Optional) Computation Method
 %                   ***DEFAULT USES MEEUS METHOD***
 %                   'meeus' = Meeus Method w/ Planetary Coeffs.
-%                   'de'    = Query DE Ephemerides File (DE430.bsp)
+%     [NOT WORKING] 'de'    = Query DE Ephemerides File (DE430.bsp)
 %   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 %   Output: out structure containing fields:
 %       1. t [nx1] Julian Date
@@ -24,6 +24,9 @@ function out = getStatePlanet(ID, JDE, method)
 %   Example:
 %       out = getPlanetState(3, 2455450)
 %       out = getPlanetState(3, [2455450; 2455610], 'de')
+%   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+%   TODO:
+%       1. Support CSPICE DEXXX.BSP Reading
 %
 
 arguments
@@ -34,7 +37,7 @@ end
 
     % NAIF ID PLANETARY DATA FOR PLANETARY STATES
     if contains('de',method)
-        
+        %{
         % Condition Julian Dates for MICE
         % JDE(:).'
         for j=1:length(JDE)
@@ -53,7 +56,7 @@ end
            out.t(j,1) = JDE(j);
            out.x(j,:) = states(j).state.';
         end
-
+        %}
 
     % MEEUS METHOD FOR PLANETARY STATE
     elseif contains('meeus',method)

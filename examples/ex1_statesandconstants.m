@@ -17,7 +17,7 @@ xi    = [r_xyz;v_xyz];
 fX1 = create_state(xi, pcd.Earth.mu, 'rv');
 
 
-
+% Example: Change true anomaly of the orbit and recompute the state
 fX2 = fX1;
 fX2.ta = pi/4;
 fX2.changed = 'aeiowta';

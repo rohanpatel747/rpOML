@@ -1,4 +1,4 @@
-function [t,stateX] = propTraj(fX, dt, rcb, pltType)
+function [t,stateX] = prop2bp(fX, dt, rcb, pltType)
 %PLOTTRAJ Plot Trajectory Integrated from ti to tf
 %   Detailed explanation goes here
 tic
