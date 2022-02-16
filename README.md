@@ -16,10 +16,11 @@ This library of MATLAB functions and scripts is designed around CU Boulder’s A
 ## Using the Library
 1. Copy/Paste  rpOMLstart.m to your project’s working directory.
 2. At the beginning of your script add the line: rpOMLstart();
+3. If CSPICE is to be initialized add this line instead: rpOMLstart('cspice',true);
 
-Note: Step (2) will clear the CSPICE kernal and reinitialze it everytime it is called. Consider this when attempting to use "rpOMLstart();" in functions or subroutines. 
+Note: Step (3) will clear the CSPICE kernal and reinitialze it everytime it is called. Consider this when attempting to use "rpOMLstart('cspice',true);" in functions or subroutines. 
 
-Examples of commonly used functions are shown in the "_examples.m" script file.
+Examples of commonly used functions are shown in the "./examples/" directory.
 
 
 ## Library Contents
