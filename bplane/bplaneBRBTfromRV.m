@@ -1,5 +1,5 @@
-function out = bplanefromRV(mu, x_)
-%BPLANEFROMVI1ANDVI2 Gets the B-Plane Parameters from State Vector
+function [BR,BT] = bplaneBRBTfromRV(mu, x_)
+%BPLANEBRBTFROMRV Returns the B-Plane BR and BT Values Only Given and RV
 %
 %   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 %   Inputs:
@@ -8,16 +8,8 @@ function out = bplanefromRV(mu, x_)
 %                           [x y; z; vx; vy; vz]
 %   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 %   Output: out structure containing fields:
-%       1. S_     [3x1]     S_hat Unit Vector
-%       2. T_     [3x1]     T_hat Unit Vector
-%       3. R_     [3x1]     R_hat Unit Vector
-%       4. b      [1x1]     B-Vector Magnitude (km)
-%       5. b_     [3x1]     B-Vector
-%       6. BR     [1x1]     B*R Component (km)
-%       7. BT     [1x1]     B*T Component (km)
-%       8. ta     [1x1]     Theta (Angle Between T and B) (rad.)
-%       9. rp     [1x1]     Close Approach Radius (km)
-%      10. d      [1x1]     Flyby Turning Angle (rad.)
+%       1. BR     [1x1]     B*R Component (km)
+%       2. BT     [1x1]     B*T Component (km)
 %   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 %
 
@@ -51,27 +43,6 @@ function out = bplanefromRV(mu, x_)
     % B-Plane Coordiantes
     BR = dot(b_,R_);
     BT = dot(b_,T_);
-    ta = acos(dot(T_,B_)); if BR<0; ta=(2*pi)-ta; end
-
-    
-    % Rp, Vinf, and Turn Angle
-    vi = sqrt(mu/abs(a));
-    rp = (mu*(e-1))/(vi^2);
-    d  = 2*asin(1/e);
-    
-    
-    % Outputs
-    out = struct;
-    out.S_ = S_;
-    out.T_ = T_;
-    out.R_ = R_;
-    out.b  = b;
-    out.b_ = b_;
-    out.BR = BR;
-    out.BT = BT;
-    out.ta = ta;
-    out.rp = rp;
-    out.d  = d;
 
 end
 
