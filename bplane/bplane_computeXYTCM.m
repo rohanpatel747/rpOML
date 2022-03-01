@@ -62,7 +62,7 @@ function out = bplane_computeXYTCM(mu,x_,BTarg,opts)
     end
 
     % Find DV Vector for TCM
-    Dx_ = xi_ - x_;
+    Dx_ = x_ - xi_;
     DV_ = Dx_(4:6);
     DV  = norm(DV_);
 
