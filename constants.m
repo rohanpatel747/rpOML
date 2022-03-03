@@ -57,7 +57,7 @@ T = [87.97*d, 224.7*d, 365.256*d, ...
 
 out.Mercury.t = T(1);
 out.Venus.t   = T(2);
-out.Earth.t   = T(3);
+out.Earth.t   = 365.242189*d; % Value override 02MAR22 from ASEN6008 Lec8 'Resonant Orbits' Slide 12
 out.Luna.t    = 27.322*d;
 out.Mars.t    = T(4);
 out.Jupiter.t = T(5);
