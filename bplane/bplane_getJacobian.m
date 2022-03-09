@@ -24,14 +24,16 @@ function jBjV = bplane_getJacobian(mu, x_, dv, opts)
 
     % Nominal B-Plane Values
     [BRn, BTn] = bplaneBRBTfromRV(mu,x_);
+    TCAn       = bplaneTCA(mu,x_);
 
     % X Perturbation Vector Matrix
     dvM = [dv,  0,  0;
             0, dv,  0;
             0,  0, dv];
 
-    jBjV = zeros(2,2);
-    for i=1:opts.npS
+    % Construct Full BR,BT,TCA Jacobian Matrix (jBjBV) [3x3]
+    jBjV = zeros(3,3);
+    for i=1:3
 
         % Perturbation Vector
         dv_ = dvM(i,:).';
@@ -40,12 +42,35 @@ function jBjV = bplane_getJacobian(mu, x_, dv, opts)
         Vp_ = x_(4:6) + dv_;
 
         % Perturbed B-Plane Parameters
-        [BRp,BTp] = bplaneBRBTfromRV(mu,[x_(1:3);Vp_]);
+        [BRp,BTp] = bplaneBRBTfromRV( mu, [x_(1:3);Vp_]);
+        TCAp      = bplaneTCA(        mu, [x_(1:3);Vp_]);
 
         % Update Jacobian Matrix
         jBjV(1,i) = (BTp - BTn)/dv;
         jBjV(2,i) = (BRp - BRn)/dv;
+        jBjV(3,i) = (TCAp-TCAn)/dv;
         
     end
     
+    if opts.npS == 2
+        jBjV = jBjV(1:2,1:2);
+    end
+    
 end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
