@@ -62,6 +62,9 @@ function out = lambert0rev(sv1, sv2, dt, mu)
 
         N = 0.8;
 
+        itrLim = 100;
+        itr    = 0;
+        
         while abs(dti-dt) > 1e-5
 
             y = r0 + rf + ((A*(psi*c3 - 1))/sqrt(c2));
@@ -86,6 +89,14 @@ function out = lambert0rev(sv1, sv2, dt, mu)
 
             psi = (psiU + psiL)/2;
             [c2,c3] = lambert_getc2c3(psi);
+            
+            itr = itr+1;
+            if itr>itrLim
+                disp('Iteration Limit Exceeded');
+                v0 = [NaN; NaN; NaN];
+                vf = v0;
+                break; 
+            end
 
         end
 
