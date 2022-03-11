@@ -4,6 +4,7 @@ function f = pkchp_plt(in)
 
     c3dep   = in.c3dep;
     vinfarr = in.vinfarr;
+    vinfdep = in.vinfdep;
     RLA     = in.RLAdep;
     DLA     = in.DLAdep;
     tof     = in.tof;
