@@ -99,6 +99,11 @@ function out = getInterplanetaryLambertInfo(depBody, arrBody, depDate, arrDate, 
         disp('_____________________________________________________________');
         disp(['Transfer Between Bodies: ',num2str(depBody), ' - ', num2str(arrBody)])
         
+        disp(' ');
+        disp(['    Dep Date   : ', datestr(datetime(jddep,'convertfrom','juliandate')), ...
+            '      ', num2str(jddep,12)]);
+        disp(['    Arr Date   : ', datestr(datetime(jdarr,'convertfrom','juliandate')), ...
+            '      ', num2str(jdarr,12)]);
         disp(['    TOF (days) : ', num2str(out.tof/86400,12)]);
         
         disp(' ');
