@@ -17,7 +17,7 @@ gaseqname = broadsearch_sequencename(out.seq);
 
 
 
-if true
+if false
 figure()
 hold on
 for i=1:height(out.encs)
@@ -31,13 +31,10 @@ end
 if true
 figure()
 hold on
-scatter([1:height(out.cost)],out.costsum,'r','filled');
-lgnd = {'Total'};
-
-for i=1:width(out.cost)
-    scatter([1:height(out.cost)],out.cost(:,i),'x');
-    lgnd{1,i+1} = [gaseqname(i+1),'GA']; %[getPlanetName(out.seq(i)),' GA'];
-end
+scatter([1:height(out.cost)],out.cost(:,1),'x')
+scatter([1:height(out.cost)],out.cost(:,2),'x')
+scatter([1:height(out.cost)],out.cost(:,3),'x')
+scatter([1:height(out.cost)],out.costsum,'r','filled')
 hold off
 if max(out.costsum)+1 < Jmax
     ylim([-0.0 max(out.costsum)+1]);
@@ -48,7 +45,7 @@ xticks([1:1:height(out.cost)]);
 title([gaseqname, ' Sequence Cost'],'fontsize',12,'interpreter','latex');
 xlabel('Trajectory Number','fontsize',12,'interpreter','latex');
 ylabel('Velocity Discontinuity at Flyby (Cost) (km/s)','fontsize',12,'interpreter','latex');
-legend(lgnd,'fontsize',12,'interpreter','latex');
+legend([],
 set(gca,'TickLabelInterpreter','latex');
 grid on; box on;
 set(gcf,'color','w');
