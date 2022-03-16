@@ -30,7 +30,7 @@ function out = lambert0rev(sv1, sv2, dt, mu, opts)
        sv2;
        dt;
        mu;
-       opts.DM = 0;
+       opts.DM = 1;
     end
 
 
@@ -46,13 +46,8 @@ function out = lambert0rev(sv1, sv2, dt, mu, opts)
        dnu = (2*pi) + dnu; 
     end
 
-    % Force a Direction of Motion as an Optional Input
-    if opts.DM == 0
-        DM=1; 
-        if dnu > pi; DM=-1; end
-    else
-        DM = opts.DM;
-    end
+    DM=1; 
+    if dnu > pi; DM=-1; end
    
     cdnu = dot(r0_,rf_)/(r0*rf);
 
@@ -78,8 +73,6 @@ function out = lambert0rev(sv1, sv2, dt, mu, opts)
 
         itrLim = 100;
         itr    = 0;
-        
-        lbroken = false;
         
         while abs(dti-dt) > 1e-5
 

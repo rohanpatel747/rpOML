@@ -1,0 +1,16 @@
+
+
+clear; clc; close all; format long g; rpOMLstart();
+pcd = constants(); mu = pcd.Sun.mu;
+
+
+
+%encs = [2453755.29167; 2454159.73681; 2457217.99931];
+%bdys = [3; 5; 9];
+
+encs = [{'12-May-2022'}; {'12-May-2023'}];
+bdys = [3; 3];
+
+
+arc1 = getInterplanetaryLambertInfo(bdys(1), bdys(2), encs{1}, encs(2));
+
