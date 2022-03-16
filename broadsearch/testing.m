@@ -6,6 +6,7 @@ clear; close all; clc; format long g; rpOMLstart();
 % _________________________________________________________________________
 % Inputs
 if false
+% EJS Trajectory
 ei = getJulianDate('01-08-2037');
 ji = getJulianDate('01-02-2039');
 si = getJulianDate('01-09-2040');
@@ -23,35 +24,31 @@ in.constrainVinf   = [sqrt(c3); 16];
 in.constrainRflyby = 0;
 
 
-end
-
-
-
-
-
+else
+% EVEEJ Trajectory
 e1 = getJulianDate('01-03-2023');
 e2 = getJulianDate('01-09-2023');
 e3 = getJulianDate('01-08-2024');
 e4 = getJulianDate('01-11-2027');
-e5 = getJulianDate('01-12-2030');
+e5 = getJulianDate('01-12-2030') - 300;
 
 c3 = 25;
     
 in = struct;
 in.verbose = true;
-%in.spacing = [10; 10];
+in.spacing = [10;10;10;10;10];
 in.sequence = [
     3, e1, e1+100;
     2, e2, e2+100;
     3, e3, e3+100;
     3, e4, e4+150;
-    5, e5, e5+300;
+    5, e5, e5+600;
 ];
 in.constrainVinf   = [sqrt(c3); 16];
 in.constrainRflyby = 0;
 
 
-
+end
 
 
 
@@ -282,27 +279,28 @@ noPatches  = noPatches-1;
 % Output Data
 fp = dataTrajUF.(['p',num2str(noPatches)]);
 
-j=1;
+j=1; seqL = height(sequence);
 for i=1:height(fp.cost)
     if ~isnan(fp.cost(i,:))
 
-        cost(j,:) = fp.cost(i,:);
+        cost(j,:)    = fp.cost(i,:);
         costsum(j,1) = sum(cost(j,:));
-        
-        encs = [fp.legdata(i,2)];
-        encsd= [datetime(encs,'convertfrom','juliandate')];
-        fbalt= [NaN];
-        fbta = [NaN];
+        encs(j,1)    = fp.legdata(i,2);
+        encsd(j,1)   = datetime(encs(1),'convertfrom','juliandate');
+        fbalt(j,1 )  = NaN;
+        fbta(j,1)    = NaN;
+        kk=2;
         for k=1:4:width(fp.flyby)
-            encs = [encs , fp.flyby(i,k)];
-            encsd= [encsd; datetime(fp.flyby(i,k),'convertfrom','juliandate')];
-            fbalt= [fbalt, fp.flyby(i,k+2)];
-            fbta = [fbta , fp.flyby(i,k+3)];
+            encs(j,kk)  = fp.flyby(i,k);
+            encsd(j,kk) = datetime(fp.flyby(i,k),'convertfrom','juliandate');
+            fbta(j,kk)  = fp.flyby(i,k+3);
+            fbalt(j,kk) = fp.flyby(i,k+2);
+            kk=kk+1;
         end
-        encs  = [encs, fp.legdata(i,3)];
-        fbalt = [fbalt, NaN];
-        fbta  = [fbta, NaN];
-        encsd= [encsd; datetime(encs(end),'convertfrom','juliandate')];
+        encs(j,seqL)  = fp.legdata(i,3);
+        fbalt(j,seqL) = NaN;
+        fbta(j,seqL)  = NaN;
+        encsd(j,seqL) = datetime(encs(end),'convertfrom','juliandate');
 
         j=j+1;
     end
