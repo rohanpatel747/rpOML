@@ -303,8 +303,7 @@ for i=1:height(fp.cost)
         fbalt = [fbalt, NaN];
         fbta  = [fbta, NaN];
         encsd= [encsd; datetime(encs(end),'convertfrom','juliandate')];
-        
-        
+
         j=j+1;
     end
 
