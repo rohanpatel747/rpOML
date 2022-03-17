@@ -20,10 +20,6 @@ function out = lambert0rev(sv1, sv2, dt, mu, opts)
 %       2. Bate, Muller, and White "Fundamentals of Astrodynamics"
 %       3. Vallado "Fundamentals of Astrodynamics and Applications"
 %   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-%   TODO:
-%       1. Iteration counter to prematurely terminate the solver if
-%          solution cannot be found
-%
 %
     arguments
        sv1;
