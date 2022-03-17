@@ -9,13 +9,15 @@ mu = pcd.Sun.mu;
 
 
 
-
-load EVEEJ_tmpoutput3.mat;
+%load EJP_NH.mat;
+%load EVEEJ_tmpoutput3.mat;
+load EH_EJS_Lab6.mat;
 Jmax = 5;
 
+out.encs = out.encs(3,:);
+
+
 gaseqname = broadsearch_sequencename(out.seq);
-
-
 
 if true
 figure()
@@ -24,8 +26,13 @@ for i=1:height(out.encs)
     broadsearch_plotTraj(out.seq,out.encs(i,:))
 end
 hold off
-grid on; box on; axis equal;
-set(gcf,'color','w');
+title([gaseqname, ' Trajectory'],'fontsize',12,'interpreter','latex');
+xlabel('X EC','fontsize',12,'interpreter','latex');
+ylabel('Y EC','fontsize',12,'interpreter','latex');
+zlabel('Z EC','fontsize',12,'interpreter','latex');
+set(gca,'TickLabelInterpreter','latex');
+grid on; box on;
+set(gcf,'color','w'); axis equal;
 end
 
 if true

@@ -1,11 +1,12 @@
 
 clear; close all; clc; format long g; rpOMLstart();
 
+trajCase = 3;
 
 
 % _________________________________________________________________________
 % Inputs
-if false
+if trajCase == 1
 % EJS Trajectory
 ei = getJulianDate('01-08-2037');
 ji = getJulianDate('01-02-2039');
@@ -24,7 +25,7 @@ in.constrainVinf   = [sqrt(c3); 16];
 in.constrainRflyby = 0;
 
 
-else
+elseif trajCase == 2
 % EVEEJ Trajectory
 e1 = juliandate('01-feb-2023','dd-mmm-yyyy');
 e2 = juliandate('01-sep-2023','dd-mmm-yyyy');
@@ -46,6 +47,31 @@ in.sequence = [
 ];
 in.constrainVinf   = [sqrt(c3); 16];
 in.constrainRflyby = 0;
+
+
+
+
+
+
+elseif trajCase == 3
+% EJP Trajectory
+e1 = 2453755.29167;
+e2 = 2454129.5;
+e3 = 2456917.5;
+
+c3 = 180;
+
+in = struct;
+in.verbose = true;
+in.spacing = [5;5;5];
+in.sequence = [
+    3, e1, e1;
+    5, e2, 2454239.5;
+    9, e3, 2457517.5;
+];
+in.constrainVinf   = [sqrt(c3); 200];
+
+
 
 
 end
@@ -82,7 +108,7 @@ end
 global pcd
 pcd = constants();
 
-Jmax = 0.5; 
+Jmax = 0.05; 
 sequence = in.sequence;
 verbose  = in.verbose;
 
@@ -370,12 +396,12 @@ for i=1:height(leg1.legdata)
             J  = abs(J2-J1);
             
             
-            if round(J,5)<=Jmax
+            if J<=Jmax
                 
                 % Compute Flyby Parameters
                 fbb  = leg1.ab;
-                vi1_ = leg1.legdata(i,7:9).';
-                vi2_ = leg2.legdata(j,10:12).';   
+                vi1_ = leg1.legdata(i,10:12).';
+                vi2_ = leg2.legdata(j,7:9).';   
                 mufb = pcd.(getPlanetName(fbb)).mu;
                 bpdata = bplanefromVi1Vi2(mufb, vi1_, vi2_);
                 
