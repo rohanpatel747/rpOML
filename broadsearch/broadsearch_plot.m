@@ -18,7 +18,7 @@ function broadsearch_plot(out)
     gaseqname = broadsearch_sequencename(out.seq);
     Jmax = max(out.costsum);
 
-    if true
+
     figure()
     hold on
     for i=1:height(out.encs)
@@ -32,9 +32,9 @@ function broadsearch_plot(out)
     set(gca,'TickLabelInterpreter','latex');
     grid on; box on;
     set(gcf,'color','w'); axis equal;
-    end
+    
 
-    if true
+
     figure()
     hold on
     scatter([1:height(out.cost)],out.costsum,'r','filled');
@@ -58,6 +58,6 @@ function broadsearch_plot(out)
     set(gca,'TickLabelInterpreter','latex');
     grid on; box on;
     set(gcf,'color','w');
-    end
+    
 
 end

@@ -1,9 +1,11 @@
 % rpOML - broadsearch testing script (to be removed eventually)
 clear; close all; clc; format long g; rpOMLstart();
 
+global pcd mu
+pcd = constants();
+mu = pcd.Sun.mu;
 
-
-trajCase = 1;
+trajCase = 2;
 
 
 % _________________________________________________________________________
@@ -51,6 +53,9 @@ end
 
 
 out = broadsearch(in);
+
+out.encs = out.encs(3,:);
+
 broadsearch_plot(out);
 
 

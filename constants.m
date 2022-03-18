@@ -5,7 +5,7 @@ function out = constants()
 % Conversions
 out.aukm    = 1.49597870700e8;
 out.dayyear = 365.242189;
-out.G       = 6.67259e-11;
+out.G       = 6.67259e-11 * 1e-9;
 out.c       = 299792458;
 
 
@@ -74,7 +74,7 @@ out.units.t   = "s";
 out.units.mu  = "km3/s2";
 out.units.aukm= "km";
 out.units.dyr = "days";
-out.units.G   = "(N m2)/kg2";
+out.units.G   = "(N km2)/kg2";
 out.units.c   = "km/s";
 
 
