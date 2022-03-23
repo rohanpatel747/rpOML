@@ -39,6 +39,7 @@ function out = getAnomalyandDt(k,displayOut)
         MnAnom = EcAnom - k.e*sin(EcAnom);                  % Mean Anomaly (rad)
         dtPeri = MnAnom/n;                                  % Time since periapsis (s)
         if dtPeri < 0; dtPeri = k.T + dtPeri; end
+        hypOrb = false;
         
     elseif round(k.e,eccTol) > 1
         % Hyperbolic
