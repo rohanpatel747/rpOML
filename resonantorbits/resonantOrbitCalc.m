@@ -58,6 +58,7 @@ function out = resonantOrbitCalc(in)
     vinf1 = norm(vinf1_);
     vinf2 = norm(vinf2_);
     vinf = (vinf1+vinf2)/2;
+    %vinf = vinf2;
 
 
     % Resonant Orbit Properties and Angle Between Vp and Vinf.

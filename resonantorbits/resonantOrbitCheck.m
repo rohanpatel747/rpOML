@@ -51,7 +51,7 @@ function resonantOrbitCheck(in)
     vinf2_= vinf2_(:);
     vinf1 = norm(vinf1_);
     vinf2 = norm(vinf2_);
-    vinf = vinf2;   % Bias solution to outgoing V-infinity magnitude
+    vinf = (vinf1+vinf2)/2;   % Bias solution to outgoing V-infinity magnitude
 
 
     % Resonant Orbit Properties and Angle Between Vp and Vinf.
@@ -126,7 +126,7 @@ function resonantOrbitCheck(in)
     disp(['Ballistic ',num2str(prev),':',num2str(srev),' Resonant Orbit w.r.t: ', ...
         getPlanetName(resbdy)]);
     disp('Limiting Flyby Highest Radius at:')
-    disp(['    Locus Angle phi = ', num2str(ruseable(midx,1)),' deg.']);
+    disp(['    Locus Angle phi = ', num2str(ruseable(midx,1),20),' deg.']);
     disp(['    Flyby 1 Radius  = ', num2str(ruseable(midx,2)),' km'  ]);
     disp(['    Flyby 2 Radius  = ', num2str(ruseable(midx,3)),' km'  ]);
     disp(' ');disp(' ');disp(' ');

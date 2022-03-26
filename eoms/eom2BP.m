@@ -1,5 +1,5 @@
 function dYdt = eom2BP(t,Y, mu)
-%EOM2BP 2-Body EOM [6x1] Cartesian State for given Julian Date(s) Vector
+%EOM2BP 2-Body EOM [6x1]
 %
 %   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 %   Inputs:

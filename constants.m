@@ -3,7 +3,7 @@ function out = constants()
 
 
 % Conversions
-out.aukm    = 1.49597870700e8;
+out.aukm    = 1.49597870691e8;
 out.dayyear = 365.242189;
 out.G       = 6.67259e-11 * 1e-9;
 out.c       = 299792458;
