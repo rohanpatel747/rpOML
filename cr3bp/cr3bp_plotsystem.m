@@ -23,7 +23,7 @@ function cr3bp_plotsystem(sys, time, state)
     out2 = cr3bp_convertRotNDToInertial(sys, time, state2);
 
     figure()
-    ft = tiledlayout(1,2,'Tilespacing','compact','Padding','compact');
+    ft = tiledlayout(3,1,'Tilespacing','compact','Padding','compact');
     title(ft,[sys.name,' System'],'fontsize',14,'interpreter','latex');
     set(gcf,'color','w');
 
@@ -50,5 +50,18 @@ function cr3bp_plotsystem(sys, time, state)
     xlabel('X Inertial (km)','fontsize',12,'interpreter','Latex');
     ylabel('Y Inertial (km)','fontsize',12,'interpreter','Latex');
     zlabel('Z Inertial (km)','fontsize',12,'interpreter','Latex');
-
+    
+    nexttile
+    hold on
+    plot3(out(:,2), out(:,3), out(:,4));
+    plot3(out1(:,2), out1(:,3), out1(:,4),'r');
+    plot3(out2(:,2), out2(:,3), out2(:,4),'k');
+    hold off
+    view(45,45)
+    grid on; box on; axis equal;
+    legend({'Spacecraft','Primary Body','Secondary Body'},'fontsize',12,'interpreter','Latex');
+    xlabel('X Inertial (km)','fontsize',12,'interpreter','Latex');
+    ylabel('Y Inertial (km)','fontsize',12,'interpreter','Latex');
+    zlabel('Z Inertial (km)','fontsize',12,'interpreter','Latex');
+    %}
 end

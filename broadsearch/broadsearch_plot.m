@@ -22,7 +22,7 @@ function broadsearch_plot(out)
     figure()
     hold on
     for i=1:height(out.encs)
-        broadsearch_plotTraj(out.seq,out.encs(i,:))
+        broadsearch_plotTraj(out.seq,out.encs(i,:),out.mu,out.pcd);
     end
     hold off
     title([gaseqname, ' Trajectory'],'fontsize',12,'interpreter','latex');
