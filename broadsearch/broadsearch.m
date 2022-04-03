@@ -94,7 +94,7 @@ function out = broadsearch(in)
 %   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 %
 
-    global pcd
+    %global pcd
     pcd = constants();
 
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -329,6 +329,8 @@ function out = broadsearch(in)
     end
 
     out            = struct;
+    out.pcd        = pcd;
+    out.mu         = mu;
     out.seq        = sequence(:,1);
     out.encs       = encs;
     out.encsd      = encsd;

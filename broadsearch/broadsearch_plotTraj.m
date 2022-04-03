@@ -1,4 +1,4 @@
-function broadsearch_plotTraj(seq,encs)
+function broadsearch_plotTraj(seq,encs,mu,pcd)
 %BROADSEARCH_PLOTTRAJ Intermediate Integration + Plotting of Trajectories
 %
 %   Assumptions/Warnings:
@@ -12,7 +12,7 @@ function broadsearch_plotTraj(seq,encs)
 %       5. eom2BP()
 %   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 %
-    global mu pcd
+    
 
     options = odeset('RelTol', 1e-8, 'AbsTol', 1e-8) ;
 
