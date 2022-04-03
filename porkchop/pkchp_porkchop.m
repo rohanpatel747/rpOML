@@ -81,5 +81,5 @@ function out = pkchp_porkchop(in)
     out.arrBody = arrBody;
     out.RLAdep  = rla;
     out.DLAdep  = dla;
-    out.plts    = in.plts;
+    %out.plts    = in.plts;
 end

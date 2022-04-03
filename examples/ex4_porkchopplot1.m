@@ -27,6 +27,8 @@ in.arrDate     = '01-Dec-2005';     % Earliest Arrival   Date
 in.daysPastDep = 140;               % Latest Departure (Days since Early)
 in.daysPastArr = 450;               % Latest Arrival   (Days since Early)
 in.dayStep = 2;                     % Search Step Size (Days)
+in.plts        = ["C3","VinfArr","RLA","DLA"];  % Addl Opt.: "VinfDep"
+
 
 % Plotting Bounds
 in.ctr1 = [8, 9, 10, 12, 16, 20, 25, 30, 48, 72, 100];  % Dep. C3 Contours
