@@ -1,5 +1,5 @@
 %% rpOML Examples - Porkchop Plot Between Earth and Mars (1)
-clear; clc; format long g; rpOMLstart();
+clear; clc; close all; format long g; rpOMLstart();
 tic
 %% Overview
 % This script is intended to show how to use the porkchop generation and
@@ -31,8 +31,12 @@ in.plts        = ["C3","VinfArr","RLA","DLA"];  % Addl Opt.: "VinfDep"
 
 
 % Plotting Bounds
-in.ctr1 = [8, 9, 10, 12, 16, 20, 25, 30, 48, 72, 100];  % Dep. C3 Contours
-in.ctr2 = [1:0.5:5];                                    % Arr. Vinf Contours
+in.limC3      = [8, 9, 10, 12, 16, 20, 25, 30, 48];  % Dep. C3   Contours
+in.limVinfArr = [1:0.5:5];                           % Arr. Vinf Contours
+in.limRLA     = [-180:10:180];                        % Dep. RLA  Countours
+in.limDLA     = [-90:10:90];                          % Dep. DLA  Contours
+% Additional Available Bounds Arguments:
+%in.limVinfDep
 in.ntof = 15;                                           % # of TOF Contours
 
 

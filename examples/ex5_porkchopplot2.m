@@ -31,8 +31,12 @@ in.plts        = ["C3","VinfArr"];  % Items to Plot (Addl Opt.: "VinfDep", "RLA"
 
 
 % Plotting Bounds
-in.ctr1 = [2 4 6 8 9 10 12 16 20 25 30 48 72 100];  % Departure C3 Contours
-in.ctr2 = [1:0.5:5];                                % Arrival Vinf Contours
+in.limC3      = [2 4 6 8 9 10 12 16 20 25 30 48 72 100];  % Departure C3 Contours
+in.limVinfArr = [1:0.5:5];                                % Arrival Vinf Contours
+% Additional Available Bounds Arguments:
+%in.limVinfDep
+%in.limRLA     = [-180:10:180];                        % Dep. RLA  Countours
+%in.limDLA     = [-90:10:90];                          % Dep. DLA  Contours
 in.ntof = 15;                                       % # of TOF Contours
 
 
