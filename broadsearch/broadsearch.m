@@ -129,7 +129,9 @@ function out = broadsearch(in)
     end
 
     if isfield(in,'spacing')
-        spacing = in.spacing;
+        for i=1:height(sequence)
+            spacing(i,:) = in.spacing;
+        end
     else
         for i=1:height(sequence)
             spacing(i,:) = defaultSpacing(sequence(i));
@@ -247,7 +249,14 @@ function out = broadsearch(in)
             end
         end
 
-        dataTrajUF.(['l',num2str(k)]).legdata = legdata;
+        if exist('legdata','var')
+            dataTrajUF.(['l',num2str(k)]).legdata = legdata;
+        else
+            disp('***No Solutions in bounds found. Broad Search will not complete.***')
+            disp(' ');
+            %dataTrajUF.l1.legdata
+
+        end
 
         clear legdata;
 
@@ -266,6 +275,7 @@ function out = broadsearch(in)
         disp(['    Patching Legs:']);
     end
     noPatches = 1;
+
     for i=1:height(sequence)-2
 
         if verbose
@@ -283,14 +293,15 @@ function out = broadsearch(in)
         pi = ['p',num2str(noPatches)];
 
         %disp(legi); disp(legf); disp(pi); disp(' ');
-        dataTrajUF = broadsearch_patchLegs(dataTrajUF, legi, legf, pi, Jmax);
+        dataTrajUF = broadsearch_patchLegs(dataTrajUF, legi, legf, pi, Jmax, pcd);
 
+        noPatches = noPatches+1;
+        
         if dataTrajUF.([pi]).error
             disp('        No Solution. Trajectory Incomplete');
             break;
         end
 
-        noPatches = noPatches+1;
     end
     noPatches  = noPatches-1;
 
@@ -298,49 +309,79 @@ function out = broadsearch(in)
 
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     % Output Data
-    fp = dataTrajUF.(['p',num2str(noPatches)]);
+    out = struct;
+    
+    if height(sequence)-2 == 0 
+        dataTrajUF.p1 = dataTrajUF.l1;
 
-    j=1; seqL = height(sequence);
-    for i=1:height(fp.cost)
-        if ~isnan(fp.cost(i,:))
-
-            cost(j,:)    = fp.cost(i,:);
-            costsum(j,1) = sum(cost(j,:));
-            encs(j,1)    = fp.legdata(i,2);
-            encsd(j,1)   = datetime(encs(1),'convertfrom','juliandate');
-            fbalt(j,1 )  = NaN;
-            fbta(j,1)    = NaN;
-            kk=2;
-            for k=1:4:width(fp.flyby)
-                encs(j,kk)  = fp.flyby(i,k);
-                encsd(j,kk) = datetime(fp.flyby(i,k),'convertfrom','juliandate');
-                fbta(j,kk)  = fp.flyby(i,k+3);
-                fbalt(j,kk) = fp.flyby(i,k+2);
-                kk=kk+1;
-            end
-            encs(j,seqL)  = fp.legdata(i,3);
-            fbalt(j,seqL) = NaN;
-            fbta(j,seqL)  = NaN;
-            encsd(j,seqL) = datetime(encs(end),'convertfrom','juliandate');
-
-            j=j+1;
+        for i=1:height(dataTrajUF.p1.legdata)
+            out.encs(i,1)  = dataTrajUF.p1.legdata(i,2);
+            out.encs(i,2)  = dataTrajUF.p1.legdata(i,3);
+            out.encsd(i,1) = datetime(out.encs(i,1),'convertfrom','juliandate');
+            out.encsd(i,2) = datetime(out.encs(i,2),'convertfrom','juliandate');
         end
+        
+        out.cost       = NaN;
+        out.costsum    = NaN;
+        out.fbalt      = NaN;
+        out.fbta       = NaN;
+        out.fp         = NaN;
+        out.Jmax       = NaN;
+        out.error      = false;
+        
+    elseif dataTrajUF.(['p',num2str(noPatches)]).error == 0
+        
+        fp = dataTrajUF.(['p',num2str(noPatches)]);
 
+        j=1; seqL = height(sequence);
+        for i=1:height(fp.cost)
+            if ~isnan(fp.cost(i,:))
+
+                cost(j,:)    = fp.cost(i,:);
+                costsum(j,1) = sum(cost(j,:));
+                encs(j,1)    = fp.legdata(i,2);
+                encsd(j,1)   = datetime(encs(1),'convertfrom','juliandate');
+                fbalt(j,1 )  = NaN;
+                fbta(j,1)    = NaN;
+                kk=2;
+                for k=1:4:width(fp.flyby)
+                    encs(j,kk)  = fp.flyby(i,k);
+                    encsd(j,kk) = datetime(fp.flyby(i,k),'convertfrom','juliandate');
+                    fbta(j,kk)  = fp.flyby(i,k+3);
+                    fbalt(j,kk) = fp.flyby(i,k+2);
+                    kk=kk+1;
+                end
+                encs(j,seqL)  = fp.legdata(i,3);
+                fbalt(j,seqL) = NaN;
+                fbta(j,seqL)  = NaN;
+                encsd(j,seqL) = datetime(encs(end),'convertfrom','juliandate');
+
+                j=j+1;
+            end
+
+        end
+        
+        out.encs       = encs;
+        out.encsd      = encsd;
+        out.cost       = cost;
+        out.costsum    = costsum;
+        out.fbalt      = fbalt;
+        out.fbta       = fbta;
+        out.fp         = fp;
+        out.Jmax       = Jmax;
+        out.error      = false;
+    else
+        disp('Unable to patch trajectory and output results. Error flag thrown.')
+        disp('Returning Individual Leg Data.')
+        out.error = true;
     end
 
-    out            = struct;
+    
     out.pcd        = pcd;
     out.mu         = mu;
     out.seq        = sequence(:,1);
-    out.encs       = encs;
-    out.encsd      = encsd;
-    out.cost       = cost;
-    out.costsum    = costsum;
-    out.fbalt      = fbalt;
-    out.fbta       = fbta;
     out.dataTrajUF = dataTrajUF;
-    out.fp         = fp;
-    out.Jmax       = Jmax;
+
 
 end
 

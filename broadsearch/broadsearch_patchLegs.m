@@ -1,4 +1,4 @@
-function dataTrajUF = broadsearch_patchLegs(dataTrajUF, leg1, leg2, patchName,Jmax)
+function dataTrajUF = broadsearch_patchLegs(dataTrajUF, leg1, leg2, patchName,Jmax, pcd)
 %BROADSEARCH_PATCHLEGS Patch two leg sets of Lambert solutions
 %
 %   Assumptions/Warnings:
@@ -10,8 +10,6 @@ function dataTrajUF = broadsearch_patchLegs(dataTrajUF, leg1, leg2, patchName,Jm
 %       3. bplanefromVi1Vi2()
 %   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 %
-
-    global pcd
 
     leg1 = dataTrajUF.(leg1);
     leg2 = dataTrajUF.(leg2);
@@ -52,7 +50,6 @@ function dataTrajUF = broadsearch_patchLegs(dataTrajUF, leg1, leg2, patchName,Jm
                 J2 = leg2.legdata(j,5);
                 J  = abs(J2-J1);
 
-
                 if J<=Jmax
 
                     % Compute Flyby Parameters
@@ -87,10 +84,19 @@ function dataTrajUF = broadsearch_patchLegs(dataTrajUF, leg1, leg2, patchName,Jm
                         cost(i,((pnum-1)*1)+1)  = NaN;
                         refleg(i,((pnum-1)*2)+1) = NaN;
                         refleg(i,((pnum-1)*2)+1+1) = NaN;
-                        flyby(i,((pnum-1)*3)+1) = NaN;
-                        flyby(i,((pnum-1)*3)+1+1) = NaN;
-                        flyby(i,((pnum-1)*3)+1+2) = NaN;
+                        flyby(i,((pnum-1)*4)+1) = date1;
+                        flyby(i,((pnum-1)*4)+2) = rp;
+                        flyby(i,((pnum-1)*4)+3) = rp-pcd.(getPlanetName(fbb)).r;
+                        flyby(i,((pnum-1)*4)+4) = d;
                     end
+                else
+                    % J criteria was not met debugging values printed w/ Error
+%                     disp('hi')
+%                     cost(i,((pnum-1)*1)+1)  = J;
+%                     flyby(i,((pnum-1)*4)+1) = date1;
+%                     flyby(i,((pnum-1)*4)+2) = NaN;
+%                     flyby(i,((pnum-1)*4)+3) = NaN;
+%                     flyby(i,((pnum-1)*4)+4) = NaN;
                 end
             end
         end
@@ -98,6 +104,8 @@ function dataTrajUF = broadsearch_patchLegs(dataTrajUF, leg1, leg2, patchName,Jm
 
     if isnan(cost(:,((pnum-1)*1)+1))
         dataTrajUF.([patchName]).error = true;
+        dataTrajUF.([patchName]).cost    = cost;
+        dataTrajUF.([patchName]).flyby   = flyby;
     else
         dataTrajUF.([patchName]).error   = false;
         dataTrajUF.([patchName]).legdata = legdata;

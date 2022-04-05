@@ -1,4 +1,4 @@
-function broadsearch_plotTraj(seq,encs,mu,pcd)
+function broadsearch_plotTraj(seq,encs,mu,pcd,plotColor)
 %BROADSEARCH_PLOTTRAJ Intermediate Integration + Plotting of Trajectories
 %
 %   Assumptions/Warnings:
@@ -24,7 +24,7 @@ function broadsearch_plotTraj(seq,encs,mu,pcd)
 
         [~,state1] = ode45(@(t,Y) eom2BP(t,Y,mu), [0 dtPlanets], x, options);
         plot3(state1(:,1),state1(:,2),state1(:,3),'k');
-        scatter3(xf(1), xf(2), xf(3),'r','filled');
+        scatter3(xf(1), xf(2), xf(3),plotColor,'filled');
         clear state1;
     end
 
@@ -44,7 +44,7 @@ function broadsearch_plotTraj(seq,encs,mu,pcd)
 
         x1 = [x1(1:3); arc.vi];
         [~,state1] = ode45(@(t,Y) eom2BP(t,Y,mu), [0 dt], x1, options);
-        plot3(state1(:,1),state1(:,2),state1(:,3),'r');
+        plot3(state1(:,1),state1(:,2),state1(:,3),plotColor);
 
     end
 end
