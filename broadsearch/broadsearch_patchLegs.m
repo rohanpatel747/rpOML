@@ -63,7 +63,7 @@ function dataTrajUF = broadsearch_patchLegs(dataTrajUF, leg1, leg2, patchName,Jm
                     rp = bpdata.rp;
                     d  = bpdata.d;
 
-                    if rp > pcd.(getPlanetName(fbb)).r
+                    if rp > pcd.(getPlanetName(fbb)).r + 500
                         legdata(i,1)     = i;
                         legdata(i,2)     = leg1.legdata(i,2);
                         legdata(i,3)     = leg2.legdata(j,3);

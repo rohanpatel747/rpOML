@@ -23,7 +23,12 @@ function broadsearch_plot(out)
         figure()
         hold on
         for i=1:height(out.encs)
-            broadsearch_plotTraj(out.seq,out.encs(i,:),out.mu,out.pcd,'r');
+            if i==1
+                pltPlanets = true;
+                broadsearch_plotTraj(out.seq,out.encs(i,:),out.mu,out.pcd,'r',pltPlanets);
+            else
+                broadsearch_plotTraj(out.seq,out.encs(i,:),out.mu,out.pcd,'r',false);
+            end
         end
         hold off
         title([gaseqname, ' Trajectory'],'fontsize',12,'interpreter','latex');

@@ -1,4 +1,4 @@
-function broadsearch_plotTraj(seq,encs,mu,pcd,plotColor)
+function broadsearch_plotTraj(seq,encs,mu,pcd,plotColor,pltPlanets)
 %BROADSEARCH_PLOTTRAJ Intermediate Integration + Plotting of Trajectories
 %
 %   Assumptions/Warnings:
@@ -17,15 +17,17 @@ function broadsearch_plotTraj(seq,encs,mu,pcd,plotColor)
     options = odeset('RelTol', 1e-8, 'AbsTol', 1e-8) ;
 
     % Plot Planets in Sequence
-    dtPlanets = (encs(end) - encs(1)) * 86400;
-    for i=1:length(seq)
-        x = getStatePlanet(seq(i), encs(1), 'meeus').x.';
-        xf= getStatePlanet(seq(i), encs(i), 'meeus').x.';
+    if pltPlanets
+        dtPlanets = (encs(end) - encs(1)) * 86400;
+        for i=1:length(seq)
+            x = getStatePlanet(seq(i), encs(1), 'meeus').x.';
+            xf= getStatePlanet(seq(i), encs(i), 'meeus').x.';
 
-        [~,state1] = ode45(@(t,Y) eom2BP(t,Y,mu), [0 dtPlanets], x, options);
-        plot3(state1(:,1),state1(:,2),state1(:,3),'k');
-        scatter3(xf(1), xf(2), xf(3),plotColor,'filled');
-        clear state1;
+            [~,state1] = ode45(@(t,Y) eom2BP(t,Y,mu), [0 dtPlanets], x, options);
+            plot3(state1(:,1),state1(:,2),state1(:,3),'k');
+            scatter3(xf(1), xf(2), xf(3),plotColor,'filled');
+            clear state1;
+        end
     end
 
 
