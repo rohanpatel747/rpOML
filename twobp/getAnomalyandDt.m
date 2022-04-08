@@ -31,7 +31,7 @@ function out = getAnomalyandDt(k,displayOut)
     eccTol = 5;                                             % Eccentricity Tolerance
     n = 2*pi/k.T;                                           % Mean Motion (2pi/period)
 
-    if round(k.e,eccTol) < 1
+    if (round(k.e,eccTol) < 1) && (round(k.e,eccTol) > 0)
         % Ellipitcal
         EcAnom = acos((1-(norm(k.r_)/k.a))/k.e);            % Eccentric Anomaly (rad)
         if k.ta > 180; EcAnom = -EcAnom; end
@@ -63,6 +63,13 @@ function out = getAnomalyandDt(k,displayOut)
         disp('***ERROR***')
         disp('Parabolic Orbit Eccentric, Mean Anomalies, and dt not coded yet');
         disp(' ');
+        hypOrb = false;
+        
+    elseif round(k.e,eccTol) == 0
+        EcAnom = 0;
+        MnAnom = 0;
+        dtPeri = 0;
+        hypOrb = false;
     end
 
     % Display Outputs

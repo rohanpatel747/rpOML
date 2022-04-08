@@ -22,11 +22,10 @@ function [out] = conv_state2ele(xi,mu,displayOut)
     emag = sqrt(dot(evec,evec));
     
     if norm(N)==0
-        enorm_ = evec/emag;
-        enorm_ = enorm_(1:2);
-        w = atan2(enorm_(2), enorm_(1))*(180/pi);
+        enorm_ = evec/emag
+        w = atan2()*(180/pi)
     else
-        w = acos(dot(N,evec)/(norm(N)*emag))*(180/pi);
+        w = acos(dot(N,evec)/(norm(N)*emag))*(180/pi)
     end
     
     
