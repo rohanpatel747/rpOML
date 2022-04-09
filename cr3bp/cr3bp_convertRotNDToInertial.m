@@ -1,4 +1,4 @@
-function out = cr3bp_convertRotNDToInertial(sys, time, state, n)
+function out = cr3bp_convertRotNDToInertial(sys, time, state)
 %CR3BP_CONVERTTOINERTIAL Converts State and Time Arrays to Inertial Coords.
 %
 %   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -45,9 +45,6 @@ function out = cr3bp_convertRotNDToInertial(sys, time, state, n)
         v_i_= [v(1)-p(2);  v(2)+p(1);  v(3)];
         v_i = A*v_i_;
         
-
-        
-
         out(i,1) = t * (T/(2*pi));
         out(i,2) = L * p_i(1);
         out(i,3) = L * p_i(2);

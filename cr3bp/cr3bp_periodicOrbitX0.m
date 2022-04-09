@@ -1,5 +1,5 @@
 function out = cr3bp_periodicOrbitX0(X0_, correct_z0, mu)
-%CR3BP_PERIODICORBITX0 Summary of this function goes here
+%CR3BP_PERIODICORBITX0 Adjusts Initial State to Achieve a Periodic Orbit
 %
 %   Assumptions/Warnings:
 %   	1. Method uses Single Shooting (linearization).
