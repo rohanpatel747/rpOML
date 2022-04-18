@@ -1,4 +1,4 @@
-function out = cspice_queryState(bdyID, ti, tf, opt)
+function out = cspice_queryStateSingle(bdyID, ti, opt)
 %CSPICE_QUERYSTATE Computes States & Times (JD, Cal, ET) of .bsp Traj. File
 %
 %   Assumptions/Warnings:
@@ -36,7 +36,6 @@ function out = cspice_queryState(bdyID, ti, tf, opt)
 arguments
     bdyID
     ti
-    tf
     opt.dtDays {mustBeNumeric} = 10;
     opt.ctrBdy {mustBeTextScalar} = 'SOLAR SYSTEM BARYCENTER';
     opt.frame  {mustBeTextScalar} = 'ECLIPJ2000';
@@ -47,28 +46,19 @@ ctrbdy = opt.ctrBdy;
 frame  = opt.frame;
 dtDays = opt.dtDays;
 
+
 % Accept Either Julian Date or Calendar Date
 if ischar(ti)
     tijd = juliandate(depDate,'dd-mmm-yyyy');
 elseif isnumeric(ti)
     tijd = ti;
 end
-if ischar(tf)
-    tfjd = juliandate(arrDate,'dd-mmm-yyyy');
-elseif isnumeric(tf)
-    tfjd = tf;
-end  
+
 
 % Convert to Ephemeris Time
 eti = cspice_str2et(['JD',num2str(tijd,10)]);
-etf = cspice_str2et(['JD',num2str(tfjd,10)]);
+et(1,:) = eti;
 
-j=1; et(1,:) = eti;
-for i=1:dtDays:(tfjd-tijd)-1
-    et(j+1,:) = cspice_str2et(['JD',num2str(tijd + i,10)]);
-    j=j+1;
-end
-et(j,:)=etf;
 
 % Query States
 sc1 = mice_spkezr(bdyID, et.', frame, 'NONE', ctrbdy);
@@ -79,11 +69,8 @@ sc  = [sc1.state];
 out        = struct;
 out.bdyID  = bdyID;
 out.tiet   = eti;
-out.tfet   = etf;
 out.tijd   = tijd;
-out.tfjd   = tfjd;
 out.tical  = cspice_et2utc( eti, 'C', 3);
-out.tfcal  = cspice_et2utc( etf, 'C', 3);
 out.ctrBdy = ctrbdy;
 out.frame  = frame;
 out.x(:,1) = sc(1,:);

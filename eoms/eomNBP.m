@@ -38,11 +38,13 @@ function dYdt = eomNBP(t,Y, mu, pList, muList, eti, cbname, backOffset)
         
         % Body Position Vector
         if i==1
-            b_ = mice_spkezr(num2str(pList(i)), eti+t-backOffset, 'J2000', ...
-            'NONE', cbname).state(1:3);
+            %b_ = mice_spkezr(num2str(pList(i)), eti+t-backOffset, 'J2000', ...
+            %'NONE', cbname).state(1:3);
+            b_ = getStatePlanet(pList(i),(eti + (t/86400))).x.';
         else
-           b_ = mice_spkezr(num2str(pList(i)), eti+t, 'J2000', ...
-            'NONE', cbname).state(1:3); 
+           %b_ = mice_spkezr(num2str(pList(i)), eti+t, 'J2000', ...
+           % 'NONE', cbname).state(1:3);
+           b_ = getStatePlanet(pList(i),(eti + (t/86400))).x.';
         end
         b  = b_/(norm(b_)^3);
         

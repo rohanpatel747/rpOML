@@ -17,7 +17,7 @@ function [F,ta] = kepHypAnomaly(Mh, e, tol)
         f  = e*sinh(F) - F - Mh;
         df = e*cosh(F) -1;
         ratio = f/df;
-        F = F - ratio;    
+        F = F - ratio;
     end
 
     ta = sqrt((e+1)/(e-1))*tanh(F/2);

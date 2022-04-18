@@ -1,4 +1,4 @@
-function out = getStatePlanet(ID, JDE, method)
+function out = getStatePlanet(ID, JDE, method, opt)
 %GETSTATEPLANET Returns [6x1] Cartesian State for given Julian Date(s) Vector
 %
 %   Assumptions/Warnings:
@@ -10,69 +10,53 @@ function out = getStatePlanet(ID, JDE, method)
 %       3. method   [str]  (Optional) Computation Method
 %                   ***DEFAULT USES MEEUS METHOD***
 %                   'meeus' = Meeus Method w/ Planetary Coeffs.
-%     [NOT WORKING] 'de'    = Query DE Ephemerides File (DE430.bsp)
+%                   'ephem' = Query DE Ephemerides File
+%       -. If 'ephem' is used, optional inputs are:
+%           - 'ephemFrame'  = Specify Frame (Default: 'ECLIPJ2000')
+%           - 'ephemCtrBdy' = Specify Center Body (Default: 'SOLAR SYSTEM
+%                                                              BARYCENTER')
 %   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 %   Output: out structure containing fields:
-%       1. t [nx1] Julian Date
+%       1. t [nx1] Julian Date (Meeus only)
 %       2. x [nx6] Inertial State Vector [x,y,z,vx,vy,vz] km and km/s
 %   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 %   Dependencies:
-%       1. rpOML - getMeeusData()
-%       2. mice  - cspcie_str2et()
-%       3. mice  - mice_spkezr()
+%       1. getMeeusData()
+%       2. cspice_queryStateSingle()
 %   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 %   Example:
 %       out = getPlanetState(3, 2455450)
 %       out = getPlanetState(3, [2455450; 2455610], 'de')
 %   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-%   TODO:
-%       1. Support CSPICE DEXXX.BSP Reading
 %
 
 arguments
    ID
    JDE
    method = 'meeus'; % Use Meeus Method by Default
+   opt.ephemFrame = 'ECLIPJ2000';
+   opt.ephemCtrBdy = 'SOLAR SYSTEM BARYCENTER';
 end
+out = struct;
 
     % NAIF ID PLANETARY DATA FOR PLANETARY STATES
-    if contains('de',method)
-        %{
-        % Condition Julian Dates for MICE
-        % JDE(:).'
-        for j=1:length(JDE)
-           jd = JDE(j);
-           jds(j,:) = ['JD',num2str(jd)];
+    if contains('ephem',method)
+        for i=1:length(JDE)
+            out.x(i,1:6) = cspice_queryStateSingle(ID, JDE(i), ...
+                'ctrBdy', opt.ephemCtrBdy, ...
+                'frame' , opt.ephemFrame).x.';
         end
-        et = cspice_str2et(jds);
         
-        % Get State from DE Ephemeris Files
-        JDE = JDE(:).';
-        states = mice_spkezr(num2str(ID), et, 'J2000', 'NONE', 'SOLAR SYSTEM BARYCENTER');
         
-        % Output Data
-        out = struct;
-        for j=1:length(JDE)
-           out.t(j,1) = JDE(j);
-           out.x(j,:) = states(j).state.';
-        end
-        %}
-
     % MEEUS METHOD FOR PLANETARY STATE
     elseif contains('meeus',method)
         % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         % Constants
-
-        % Mu Sun
-        mu = 1.32712440018e11;  % Taken from Constants planetaryconstants()
-
-        % AUKM
-        aukm = 1.49597870700e8; % Taken from Constants planetaryconstants()
+        mu = 1.32712440018e11;  % Taken from Constants constants()
+        aukm = 149597870.691;   % Taken from Constants constants()
 
         % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         % Loop Through Julian Dates Given
-        out = struct;
-        
         for j=1:length(JDE)
             % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
             % Time
