@@ -63,6 +63,7 @@ function f = pkchp_plt(in)
 
     % Figure Plotting
     f = figure();
+    set(gcf,'Position', [10 10 900 600])
     set(gcf,'color','w'); box on;
     hold on
     

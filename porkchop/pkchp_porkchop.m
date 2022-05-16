@@ -33,8 +33,8 @@ function out = pkchp_porkchop(in)
         for j=1:length(jda)
             
             % Lambert's Problem Setup
-            xd = getStatePlanet(depBody, jdd(i), 'meeus').x;
-            xa = getStatePlanet(arrBody, jda(j), 'meeus').x;
+            xd = getStatePlanet(depBody, jdd(i), 'ephem').x;
+            xa = getStatePlanet(arrBody, jda(j), 'ephem').x;
             
             rd = xd(1:3);
             vd = xd(4:6);
@@ -82,4 +82,5 @@ function out = pkchp_porkchop(in)
     out.RLAdep  = rla;
     out.DLAdep  = dla;
     %out.plts    = in.plts;
+
 end

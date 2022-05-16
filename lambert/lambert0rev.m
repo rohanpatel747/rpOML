@@ -104,7 +104,7 @@ function out = lambert0rev(sv1, sv2, dt, mu, opts)
             
             itr = itr+1;
             if itr>itrLim
-                %disp('Iteration Limit Exceeded');
+                disp('Iteration Limit Exceeded');
                 lbroken = true;
                 break;
             end
