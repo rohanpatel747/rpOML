@@ -10,8 +10,15 @@ function b = broadsearch_sequencename(seq)
 %
     b = [];
     for i=1:length(seq)
-        a = getPlanetName(seq(i));
-        a = a(1);
+
+        if seq(i)<9
+            a = getPlanetName(seq(i));
+            a = a(1);
+        else
+            a = '(other)';
+        end
+
         b = [b,a];
+
     end
 end

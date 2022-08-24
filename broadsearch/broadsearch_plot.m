@@ -25,9 +25,9 @@ function broadsearch_plot(out)
         for i=1:height(out.encs)
             if i==1
                 pltPlanets = true;
-                broadsearch_plotTraj(out.seq,out.encs(i,:),out.mu,out.pcd,'r',pltPlanets);
+                broadsearch_plotTraj(out.seq,out.encs(i,:),out.mu,out.pcd,'r',pltPlanets,out.ephemType);
             else
-                broadsearch_plotTraj(out.seq,out.encs(i,:),out.mu,out.pcd,'r',false);
+                broadsearch_plotTraj(out.seq,out.encs(i,:),out.mu,out.pcd,'r',false,out.ephemType);
             end
         end
         hold off

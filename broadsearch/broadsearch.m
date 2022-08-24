@@ -19,6 +19,9 @@ function out = broadsearch(in)
 %                                   [nx1] : Constain every encounter
 %                                   [2x1] : Constain Launch and Arrival
 %       3. verbose          [T/F]   Print Verbose Statements to Cmd Window
+%       4. Ephemeis Type    ['meeus','ephem'] Switch between Meeus Alg. or
+%                                             loaded NAIF SPICE SPK for
+%                                             body states.
 %
 %   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 %
@@ -147,6 +150,12 @@ function out = broadsearch(in)
         end
     end
 
+    if isfield(in,'ephemType')
+        ephemType = in.ephemType;
+    else
+        ephemType = 'meeus';
+    end
+
 
 
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -200,8 +209,8 @@ function out = broadsearch(in)
                 dt = times{k}(i);
                 at = times{k+1}(j);
                 tof= (at-dt)*86400;
-                xi = getStatePlanet(db,dt,'meeus').x;
-                xf = getStatePlanet(ab,at,'meeus').x;
+                xi = getStatePlanet(db,dt,ephemType).x;
+                xf = getStatePlanet(ab,at,ephemType).x;
 
                 if (db==ab) && (tof>pcd.(getPlanetName(db)).t)
                     l = lambertNrev(xi,xf,tof,mu,3);
@@ -381,6 +390,7 @@ function out = broadsearch(in)
     out.mu         = mu;
     out.seq        = sequence(:,1);
     out.dataTrajUF = dataTrajUF;
+    out.ephemType  = ephemType;
 
 
 end

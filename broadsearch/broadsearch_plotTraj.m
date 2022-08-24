@@ -1,4 +1,4 @@
-function broadsearch_plotTraj(seq,encs,mu,pcd,plotColor,pltPlanets)
+function broadsearch_plotTraj(seq,encs,mu,pcd,plotColor,pltPlanets,ephemType)
 %BROADSEARCH_PLOTTRAJ Intermediate Integration + Plotting of Trajectories
 %
 %   Assumptions/Warnings:
@@ -20,8 +20,8 @@ function broadsearch_plotTraj(seq,encs,mu,pcd,plotColor,pltPlanets)
     if pltPlanets
         dtPlanets = (encs(end) - encs(1)) * 86400;
         for i=1:length(seq)
-            x = getStatePlanet(seq(i), encs(1), 'meeus').x.';
-            xf= getStatePlanet(seq(i), encs(i), 'meeus').x.';
+            x = getStatePlanet(seq(i), encs(1), ephemType).x.';
+            xf= getStatePlanet(seq(i), encs(i), ephemType).x.';
 
             [~,state1] = ode45(@(t,Y) eom2BP(t,Y,mu), [0 dtPlanets], x, options);
             plot3(state1(:,1),state1(:,2),state1(:,3),'k');
@@ -34,8 +34,8 @@ function broadsearch_plotTraj(seq,encs,mu,pcd,plotColor,pltPlanets)
     % Plot Trajectory in Sequence
     for i=1:length(seq)-1
 
-        x1 = getStatePlanet(seq(i)  , encs(i)  , 'meeus').x.';
-        x2 = getStatePlanet(seq(i+1), encs(i+1), 'meeus').x.';
+        x1 = getStatePlanet(seq(i)  , encs(i)  , ephemType).x.';
+        x2 = getStatePlanet(seq(i+1), encs(i+1), ephemType).x.';
         dt = (encs(i+1) - encs(i)) * 86400;
 
         if (seq(i) == seq(i+1)) && (dt>pcd.(getPlanetName(seq(i))).t)
