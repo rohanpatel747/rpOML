@@ -2,7 +2,7 @@
 ## MATLAB Orbital Mechanics Library
 C: 11JAN22  <br />
 **NOTE: This library is a work in progress and will be frequently updated** <br />
-Library designed around CU Boulder's ASEN5050 and ASEN6008 courses.
+Library designed around CU Boulder's ASEN5050 (Spaceflight Dynamics), ASEN6008 (Interplanetary Mission Design), and ASEN6060 (Advanced Astrodynamics) courses.
 
 ## Overview
 This library of MATLAB functions and scripts is designed around CU Boulder’s ASEN5050 and ASEN6008 courses. The intent is to catalog common astrodynamics functions and tools that are used in trajectory design and orbital mechanics. Optionally, the JPL CSPICE MICE [Toolkit](https://naif.jpl.nasa.gov/naif/toolkit.html) can be loaded through this library. Currently, rpOML is not dependent on CSPICE, but in future development, it is likely that astrodynamics functions from JPL’s library will be utilized here. The toolkit is also useful to process JPL published constants, frames, and ephemerides. rpOML primarily consists of 2-Body orbital mechanics functions and interplanetary mission design related algorithms.
