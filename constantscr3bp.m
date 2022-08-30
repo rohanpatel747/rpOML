@@ -80,7 +80,7 @@ function sys = constantscr3bp()
     fns = fieldnames(sys);
     for i=1:length(fns)
         sys.(fns{i}).mu1 = 1 - sys.(fns{i}).mu;
-        sys.(fns{i}).b1  = [   sys.(fns{i}).mu; 0.00; 0.00 ;0.00 ;0.00; 0.00];
+        sys.(fns{i}).b1  = [ - sys.(fns{i}).mu; 0.00; 0.00 ;0.00 ;0.00; 0.00];
         sys.(fns{i}).b2  = [1- sys.(fns{i}).mu; 0.00; 0.00 ;0.00 ;0.00; 0.00];
         sys.(fns{i}).name= fns{i};
     end
