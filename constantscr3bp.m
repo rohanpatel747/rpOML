@@ -25,6 +25,10 @@ function sys = constantscr3bp()
 %       1. System Parameters (Lo Section 2.2, p.25_bk)
 %
 
+    c = constants();
+
+
+
     sys.SunJupiter.mu      = 9.537e-4;
     sys.SunEarthMoon.mu    = 3.04042340206596e-06;
     sys.EarthMoon.mu       = 0.012150585609624;
@@ -76,6 +80,14 @@ function sys = constantscr3bp()
     sys.SaturnTitan.T      = 1374000;
     sys.NeptuneTriton.T    = 506400;
     sys.PlutoCharon.T      = 550300;
+    
+    sys.EarthMoon.rb1      = c.Earth.r   / sys.EarthMoon.L;
+    sys.EarthMoon.rb2      = c.Luna.r    / sys.EarthMoon.L;
+    sys.SunEarthMoon.rb1   = c.Sun.r     / sys.SunEarthMoon.L;
+    sys.SunEarthMoon.rb2   = c.Earth.r   / sys.SunEarthMoon.L;
+    sys.SunJupiter.rb1     = c.Sun.r     / sys.SunJupiter.L;
+    sys.SunJupiter.rb2     = c.Jupiter.r / sys.SunJupiter.L;
+    
 
     fns = fieldnames(sys);
     for i=1:length(fns)

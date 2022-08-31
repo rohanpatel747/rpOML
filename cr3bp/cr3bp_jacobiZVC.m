@@ -1,3 +1,4 @@
+
 function cr3bp_jacobiZVC(c3sys,J,opts) 
 %CR3BP_jacobiZVC Creates In-Plane Zero Velocity Contour given Jacobi Const.
 %
@@ -18,7 +19,6 @@ function cr3bp_jacobiZVC(c3sys,J,opts)
 %   Output: (figure)
 %
 %   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-%
 %
 
     arguments

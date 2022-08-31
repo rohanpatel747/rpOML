@@ -24,6 +24,7 @@ out.Pluto.mu = 8.71e2;
 
 
 % Planetary Radii (km)
+out.Sun.r     = 696340;
 out.Mercury.r = 2440;
 out.Venus.r   = 6051.8;
 out.Earth.r   = 6378.1363;
