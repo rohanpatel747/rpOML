@@ -16,6 +16,8 @@ function zvs = cr3bp_jacobiZVC(c3sys,J,opts)
 %
 %   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 %   Output: (figure)
+%       1. zvs        [nxn]      Array of Contour Jacobi Values (only
+%                                specified Jacobi value and lower)
 %
 %   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 %

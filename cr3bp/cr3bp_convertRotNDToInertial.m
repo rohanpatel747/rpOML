@@ -15,7 +15,8 @@ function out = cr3bp_convertRotNDToInertial(sys, time, state)
 %         Conversion Rules from Non-Dim. to Dim. System:
 %             Distance: di = L*d
 %             Velocity: si = V*s
-%             Time: ti = t*(T/(2*pi))
+%             Time:     ti = t*(T/(2*pi))
+%         Conversion Rules from Rotating to Inertial Coordinates:
 %             (X,Y,Z) = Inertial
 %             (x,y,z) = Rotational
 %             Position: ( X, Y, Z)' = A * (x_, y_, z_)'
