@@ -1,5 +1,4 @@
-
-function cr3bp_jacobiZVC(c3sys,J,opts) 
+function zvs = cr3bp_jacobiZVC(c3sys,J,opts) 
 %CR3BP_jacobiZVC Creates In-Plane Zero Velocity Contour given Jacobi Const.
 %
 %   Assumptions/Warnings:
@@ -46,7 +45,16 @@ function cr3bp_jacobiZVC(c3sys,J,opts)
     x1 = c3sys.b1(1);   x2 = c3sys.b2(1);
     y1 = c3sys.b1(2);   y2 = c3sys.b2(2);
     z1 = c3sys.b1(3);   z2 = c3sys.b2(3);
+    
+    %x1 = ones(length(x_)).*x1;
+    %y1 = ones(length(x_)).*y1;
+    %z1 = ones(length(x_)).*z1;
+    
+    %x2 = ones(length(x_)).*x2;
+    %y2 = ones(length(x_)).*y2;
+    %z2 = ones(length(x_)).*z2;
 
+    
     zvs = zeros(length(x_),length(x_));
     for i=1:length(x_)
         for j=1:length(y_)
@@ -70,12 +78,16 @@ function cr3bp_jacobiZVC(c3sys,J,opts)
             end
         end
     end
-
+    
+    
+    %r1 = ((x_-x1).^2 + (y_-y1).^2 + (z_-z1).^2).^(1/2);
+    %r2 = ((x_-x2).^2 + (y_-y2).^2 + (z_-z2).^2).^(1/2);
+    %C  = (x_.^2 + y_.^2) + ((2*(1-mu))./r1) + ((2*mu)./r2);
 
     if onlyplotcurve
 
         hold on
-        contourf(x_,y_,zvs,[J-Joffset:levels:J],'edgecolor','none');
+        contourf(x_,y_,zvs,J-Joffset:levels:J,'edgecolor','none');
         cbr = colorbar;
         set(cbr,'YTick', ...
             [J-Joffset,J-Joffset+levels:(levels*cbarfactor):J-levels,J]);
@@ -95,7 +107,7 @@ function cr3bp_jacobiZVC(c3sys,J,opts)
         scatter3(c3sys.b2(1),c3sys.b2(2),c3sys.b2(3),'k','filled');
 
 
-        contourf(x_,y_,zvs,[J-Joffset:levels:J],'edgecolor','none');
+        contourf(x_,y_,zvs,J-Joffset:levels:J,'edgecolor','none');
         cbr = colorbar; 
         set(cbr,'YTick', ...
             [J-Joffset,J-Joffset+levels:(levels*cbarfactor):J-levels,J]);
