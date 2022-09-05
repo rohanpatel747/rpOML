@@ -4,9 +4,9 @@ function dYdt = eomCR3BPwSTM(t, Y, mu)
 %
 %   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 %   Inputs:
-%       1. t          [1x1 Int.]  dt time step from ODE113
-%       2. Y          [6x1 Dbl.]  State to pass into integ. instant
-%       3. mu         [1x1 Dbl.]  Secondary Body Gravitational Param.
+%       1. t          [1x1  Int.]  dt time step from ODE113
+%       2. Y          [42x1 Dbl.]  State to pass into integ. instant
+%       3. mu         [1x1  Dbl.]  Secondary Body Gravitational Param.
 %   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 %   Output: out structure containing fields:
 %       1. dydt       [42x1 Dbl.] State Space and STM from Integration
