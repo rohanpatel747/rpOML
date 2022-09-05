@@ -5,7 +5,8 @@ function out = constants()
 % Conversions
 out.aukm    = 1.49597870691e8;
 out.dayyear = 365.242189;
-out.G       = 6.67259e-11 * 1e-9;
+out.G       = 6.67427585920743e-20; % From JPL SPICE
+%out.G       = 6.67259e-11 * 1e-9;   % NIST Physics Lab (Year <2000)
 out.c       = 299792458;
 
 
