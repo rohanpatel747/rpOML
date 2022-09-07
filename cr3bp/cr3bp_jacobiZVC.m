@@ -13,6 +13,7 @@ function zvs = cr3bp_jacobiZVC(c3sys,J,opts)
 %           'lim'          [1x1]    X/Y Axis Limits
 %           'Joffset'      [1x1]    Plot till Lower Jacobi Bound (higher E)
 %           'cbarfactor'   [1x1]    Multiplying Factor for Number of Legend Vals.
+%           'simplePlot'   [T/F]    Plot without any specific settings ^^^
 %
 %   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 %   Output: (figure)
@@ -30,6 +31,7 @@ function zvs = cr3bp_jacobiZVC(c3sys,J,opts)
         opts.levels        {mustBeNumeric} = 0.001;
         opts.Joffset       {mustBeNumeric} = 0.100;
         opts.cbarfactor    {mustBeNumeric} = 1.000;
+        opts.simplePlot    {mustBeNumericOrLogical} = false;
     end
 
     onlyplotcurve = opts.onlyplotcurve;
@@ -89,10 +91,16 @@ function zvs = cr3bp_jacobiZVC(c3sys,J,opts)
     if onlyplotcurve
 
         hold on
-        contourf(x_,y_,zvs,J-Joffset:levels:J,'edgecolor','none');
-        cbr = colorbar;
-        set(cbr,'YTick', ...
-            [J-Joffset,J-Joffset+levels:(levels*cbarfactor):J-levels,J]);
+
+        if opts.simplePlot
+            contourf(x_,y_,zvs,'edgecolor','none');
+            colorbar;
+        else
+            contourf(x_,y_,zvs,J-Joffset:levels:J,'edgecolor','none');
+            cbr = colorbar;
+            set(cbr,'YTick', ...
+                [J-Joffset,J-Joffset+levels:(levels*cbarfactor):J-levels,J]);
+        end
         hold off
 
     else
@@ -108,11 +116,15 @@ function zvs = cr3bp_jacobiZVC(c3sys,J,opts)
         scatter3(c3sys.b1(1),c3sys.b1(2),c3sys.b1(3),'r','filled');
         scatter3(c3sys.b2(1),c3sys.b2(2),c3sys.b2(3),'k','filled');
 
-
-        contourf(x_,y_,zvs,J-Joffset:levels:J,'edgecolor','none');
-        cbr = colorbar; 
-        set(cbr,'YTick', ...
-            [J-Joffset,J-Joffset+levels:(levels*cbarfactor):J-levels,J]);
+        if opts.simplePlot
+            contourf(x_,y_,zvs,'edgecolor','none');
+            colorbar;
+        else
+            contourf(x_,y_,zvs,J-Joffset:levels:J,'edgecolor','none');
+            cbr = colorbar; 
+            set(cbr,'YTick', ...
+                [J-Joffset,J-Joffset+levels:(levels*cbarfactor):J-levels,J]);
+        end
 
         hold off
         grid on; box on; axis equal;
