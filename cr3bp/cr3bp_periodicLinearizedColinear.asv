@@ -8,9 +8,7 @@ function out = cr3bp_periodicLinearizedColinear(c3sys, xyz, e0, n0, opts)
 %       2. xyz         [3x1]    Lagrange point [X;Y;Z] N.D. Position
 %       3. e0          [1x1]    X-comp. Periodic Orbit Initial State
 %       4. n0          [1x1]    Y-comp. Periodic Orbit Initial State
-%       5. x0          [4x1]    Given full var. [xi0; dxi0; eta0; deta0]
-%                               override velocity computation and use this.
-%       6. optional
+%       5. optional
 %               tf     [1x1]    Specify final time (default: 2*pi)
 %               pltFig [T/F]    Plot Figure
 %   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -31,7 +29,7 @@ function out = cr3bp_periodicLinearizedColinear(c3sys, xyz, e0, n0, opts)
         xyz;
         e0;
         n0;
-        opts.x0 {mustBeVector} = [NaN; NaN; NaN; NaN];
+        opts.x0 {m}
         opts.tf {mustBeNumeric} = NaN;
         opts.pltFig {mustBeNumericOrLogical} = false;
     end
@@ -50,13 +48,7 @@ function out = cr3bp_periodicLinearizedColinear(c3sys, xyz, e0, n0, opts)
     de0 = (l3*n0)/a3;
     dn0 = a3*l3*e0;
     
-    x0  = opts.x0;
-    
-    if isnan(x0(1))
-        x0_ = [e0; de0; n0; dn0]; 
-    else
-        x0_ = x0;
-    end
+    x0_ = [e0; de0; n0; dn0]; 
 
     % Find A3 and A4 Values for Linear Prop.
     B    = [   1     1     1     1;
