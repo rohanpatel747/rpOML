@@ -51,7 +51,6 @@ function out = cr3bp_periodicLinearizedColinear(c3sys, xyz, e0, n0, opts)
     dn0 = a3*l3*e0;
     
     x0  = opts.x0;
-    
     if isnan(x0(1))
         x0_ = [e0; de0; n0; dn0]; 
     else
