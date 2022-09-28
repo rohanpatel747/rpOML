@@ -61,7 +61,7 @@ function out = cr3bp_pseudoPotential(c3sys, xyz)
     Uyy = 1 + ((3*(1-mu)*(y^2))/(r1^5)) - ((1-mu)/(r1^3)) - ((mu)/(r2^3)) ...
         + ((3*mu*(y^2))/(r2^5));
     
-    Uyz = ((3*(1-mu)*y*z)/(r1^5)) + ((3*mu*y*z)/(r1^3));
+    Uyz = ((3*(1-mu)*y*z)/(r1^5)) + ((3*mu*y*z)/(r2^5));
     Uzy = Uyz;
     
     Uzz = ((3*(1-mu)*(z^2))/(r1^5)) - ((1-mu)/(r1^3)) + ((3*mu*(z^2))/(r2^5)) ...
