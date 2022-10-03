@@ -88,6 +88,12 @@ function sys = constantscr3bp()
     sys.SunJupiter.rb1     = c.Sun.r     / sys.SunJupiter.L;
     sys.SunJupiter.rb2     = c.Jupiter.r / sys.SunJupiter.L;
     
+    % Name to Query from API: https://ssd.jpl.nasa.gov/tools/periodic_orbits.html
+    sys.EarthMoon.ssdname     = 'earth-moon';
+    sys.JupiterEuropa.ssdname = 'jupiter-europa';
+    sys.MarsPhobos.ssdname    = 'mars-phobos';
+    sys.SaturnTitan.ssdname   = 'saturn-titan';
+
 
     fns = fieldnames(sys);
     for i=1:length(fns)
