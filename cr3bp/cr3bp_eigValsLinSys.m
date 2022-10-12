@@ -38,4 +38,8 @@ function out = cr3bp_eigValsLinSys(c3sys, xyz)
     % System In/Out-Plane Modes (Eigen Values)
     out.eigVals = [sqrt(A1); -sqrt(A1); sqrt(A2); -sqrt(A2); oopm1; oopm2];
 
+    % Full A Matrix for Linear Propagation
+    out.A = [zeros(3), eye(3); ...
+        [Uxx Uxy Uxz; Uyx Uyy Uyz; Uzx Uzy Uzz], [0 2 0; -2 0 0; 0 0 0]];
+    
 end
