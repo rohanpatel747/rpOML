@@ -27,8 +27,9 @@ function out = cr3bp_familyPSAL(c3sys,V,ds,nsp)
     poi = cr3bp_correctPO_SS_GVTMCF(c3sys, V);  % should be 1 itr. max.
     Vd  = poi.V;
     ns  = null(poi.df);
+    ns  = ns(:,1);
 
-    if sign(nsp(1)) ~= sign(ns(1))
+    if ns(1)-nsp(1) < 0
         ns = -ns;
     end
 
