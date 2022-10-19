@@ -1,5 +1,5 @@
 function out = cr3bp_familyPSAL(c3sys,V,ds,nsp)
-%CR3BP_FAMILYPSAL Construct Periodic Orbits with Pseudo-Arc Lenght Method 
+%CR3BP_FAMILYPSAL Construct Periodic Orbits with Pseudo-Arc Length Method 
 %
 %   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 %   Inputs:
