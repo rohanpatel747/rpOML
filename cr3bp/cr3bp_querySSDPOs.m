@@ -163,13 +163,23 @@ function ssdout = cr3bp_querySSDPOs(sys, family, libPt, branch, opts)
                 data(i,8) = str2num(ssd.data{i}{7});    % Jacobi Constant
                 data(i,9) = str2num(ssd.data{i}{9});    % Stability Index
             end
-            limits.period    = [str2num(ssd.limits.period{1});
-                                str2num(ssd.limits.period{2});];
-            limits.jacobi    = [str2num(ssd.limits.jacobi{1});
-                                str2num(ssd.limits.jacobi{2});];
-            limits.stability = [str2num(ssd.limits.stability{1});
-                                str2num(ssd.limits.stability{2});];
-            
+
+            if class(ssd.limits.period) == 'double'
+                limits.period    = [(ssd.limits.period(1));
+                                    (ssd.limits.period(2));];
+                limits.jacobi    = [(ssd.limits.jacobi(1));
+                                    (ssd.limits.jacobi(2));];
+                limits.stability = [(ssd.limits.stability(1));
+                                    (ssd.limits.stability(2));];
+            else
+                limits.period    = [str2num(ssd.limits.period{1});
+                                    str2num(ssd.limits.period{2});];
+                limits.jacobi    = [str2num(ssd.limits.jacobi{1});
+                                    str2num(ssd.limits.jacobi{2});];
+                limits.stability = [str2num(ssd.limits.stability{1});
+                                    str2num(ssd.limits.stability{2});];
+            end
+
             ssdout = struct;
             ssdout.signature      = ssd.signature;
             ssdout.ssdsystem      = ssd.system;

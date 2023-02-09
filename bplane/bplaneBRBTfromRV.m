@@ -7,7 +7,7 @@ function [BR,BT] = bplaneBRBTfromRV(mu, x_)
 %       2. x_     [6x1]     State Vector w.r.t. Flyby Body (km and km/s)
 %                           [x y; z; vx; vy; vz]
 %   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-%   Output: out structure containing fields:
+%   Output: [BR, BT] = 
 %       1. BR     [1x1]     B*R Component (km)
 %       2. BT     [1x1]     B*T Component (km)
 %   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

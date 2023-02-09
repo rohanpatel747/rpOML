@@ -49,12 +49,12 @@ dtDays = opt.dtDays;
 
 % Accept Either Julian Date or Calendar Date
 if ischar(ti)
-    tijd = juliandate(depDate,'dd-mmm-yyyy');
+    tijd = juliandate(ti,'dd-mmm-yyyy');
 elseif isnumeric(ti)
     tijd = ti;
 end
 if ischar(tf)
-    tfjd = juliandate(arrDate,'dd-mmm-yyyy');
+    tfjd = juliandate(tf,'dd-mmm-yyyy');
 elseif isnumeric(tf)
     tfjd = tf;
 end  
