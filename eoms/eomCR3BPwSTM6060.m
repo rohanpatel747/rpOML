@@ -29,8 +29,8 @@ stm = reshape(Y(7:end), 6,6);
 
 % State Derivaive Computation 
 d2x = x + 2*dy -(1-mu)*((x+mu)/(r1^3)) - mu*((x-(1-mu))/(r2^3));
-d2y = y - 2*dx -(1-mu)*((y)/(r1^3)) - mu*(y/(r2^3));
-d2z = -(1-mu)*((z)/(r1^3)) - mu*(z/(r2^3));
+d2y = y - 2*dx -(1-mu)*((y)/(r1^3))    - mu*(y/(r2^3));
+d2z =          -(1-mu)*((z)/(r1^3))    - mu*(z/(r2^3));
 
 dYdt_ = [dx; dy; dz; d2x; d2y; d2z];
 
