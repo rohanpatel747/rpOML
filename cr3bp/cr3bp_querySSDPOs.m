@@ -110,7 +110,9 @@ function ssdout = cr3bp_querySSDPOs(sys, family, libPt, branch, opts)
         end
     end
     if contains(family,'resonant')
-        if contains(branch,{'11';'12';'13';'14';'21';'23';'31';'32';'34';'41';'43'}); else
+        if contains(branch,{'11';'12';'13';'14';'21';'23';'31';'32';'34';'41';'43'})
+            libPt = '';
+        else
             runssd = false; disp('Aborting Query:')
             disp('    Resonant Orbits Require Branch Input:');
             disp(['       pq = ','11 ','12 ','13 ','14 ','21 ','23 ','31 ','32 ','34 ','41 ','43'])
