@@ -1,19 +1,19 @@
-function colorIndex = getPlotColorMatrix(colorType, A, sortbyIndex)
+function out = getPlotColorMatrix(colorType, A, sortbyIndex)
 %GETPLOTCOLORMATRIX Returns RGB Triplet of Intensity in Row of A
 %
 %   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 %   Inputs:
-%       1. A          [nx9 Dbl.]  Col. Matrix of Data
-%       2. sortbyIndex[1x1 Dbl.]  Row to Color Data to Sort By:
-%       3. colorType  [str.]      MATLAB Colormap Type:
+%       1. colorType  [str.]      MATLAB Colormap Type:
 %                                   'parula','cool','jet', etc.
+%       2. A          [nx9 Dbl.]  Col. Matrix of Data
+%       3. sortbyIndex[1x1 Dbl.]  Row to Color Data to Sort By:
 %   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 %   Output:
 %       1. colordata  [nx1  Dbl.] RGB color pair w.r.t A(:,sortbyIndex)
 %   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 %
     minval = min(A(:,sortbyIndex));
-    %maxval = max(A(:,sortbyIndex));
+    maxval = max(A(:,sortbyIndex));
     
     B = A(:,sortbyIndex);
     B = B-minval;
@@ -38,4 +38,9 @@ function colorIndex = getPlotColorMatrix(colorType, A, sortbyIndex)
             colorIndex(ind,1:3) = cmap(i,2:4);
         end
     end
+
+    out.colorIndex = colorIndex;
+    out.caxis      = [minval, maxval];
+
+
 end
