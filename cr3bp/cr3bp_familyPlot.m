@@ -66,19 +66,19 @@ function out = cr3bp_familyPlot(c3sys, A, sortbyIndex, colorType, pltFig, initia
     elseif sortbyIndex == 9
         cbarName = 'Number of Iterations (itr)';
     elseif sortbyIndex == 7
-        cbarName = 'Orbit Period (T) (ND Rot.)';
+        cbarName = 'Orbit Period (T) (ND)';
     elseif sortbyIndex == 6
-        cbarName = 'Initial State (dZ) (ND Rot.)';
+        cbarName = 'Initial State (dZ) (ND)';
     elseif sortbyIndex == 5
-        cbarName = 'Initial State (dY) (ND Rot.)';
+        cbarName = 'Initial State (dY) (ND)';
     elseif sortbyIndex == 4
-        cbarName = 'Initial State (dX) (ND Rot.)';
+        cbarName = 'Initial State (dX) (ND)';
     elseif sortbyIndex == 3
-        cbarName = 'Initial State (Z) (ND Rot.)';
+        cbarName = 'Initial State (Z) (ND)';
     elseif sortbyIndex == 2
-        cbarName = 'Initial State (Y) (ND Rot.)';
+        cbarName = 'Initial State (Y) (ND)';
     elseif sortbyIndex == 1
-        cbarName = 'Initial State (X) (ND Rot.)';
+        cbarName = 'Initial State (X) (ND)';
     end
     
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -106,14 +106,12 @@ function out = cr3bp_familyPlot(c3sys, A, sortbyIndex, colorType, pltFig, initia
         
         cb = colorbar;
         caxis([minval maxval]);
-        ylabel(cb,cbarName,'fontsize',12,'interpreter','Latex'); 
+        ylabel(cb,cbarName,'fontsize',16,'interpreter','Latex'); 
         
         grid on; box on; axis equal; set(gcf,'color','w');
-        xlabel('X Rot. (ND)','fontsize',12,'interpreter','Latex');
-        ylabel('Y Rot. (ND)','fontsize',12,'interpreter','Latex');
-        zlabel('Z Rot. (ND)','fontsize',12,'interpreter','Latex');
-        legend({'Primary','Secondary','Lagrange Pts.'}, ...
-         'fontsize',12,'interpreter','Latex','location','southwest');
+        xlabel('X (ND)','fontsize',16,'interpreter','Latex');
+        ylabel('Y (ND)','fontsize',16,'interpreter','Latex');
+        zlabel('Z (ND)','fontsize',16,'interpreter','Latex');
     end
     
     
