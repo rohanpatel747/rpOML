@@ -42,6 +42,7 @@ function out = cr3bp_correctPO_SS_GVTMCF(c3sys, V)
         V  = V - df.'*((df*df.')\f);
     
         % Loop Termination Condition
+        disp(norm(f))
         fval(itr+1) = norm(f);
         itr=itr+1;
     

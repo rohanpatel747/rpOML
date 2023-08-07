@@ -75,7 +75,7 @@ function out = cr3bp_periodicOrbitX0(X0_, correct_z0, mu)
 
             % Update I.C.
             X0_(7:42) = reshape(eye(6), 36,1);
-            ittr = ittr+1;
+            ittr = ittr+1
             
         else
             
