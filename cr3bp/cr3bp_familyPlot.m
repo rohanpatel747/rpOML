@@ -1,4 +1,4 @@
-function out = cr3bp_familyPlot(c3sys, A, sortbyIndex, colorType, pltFig, initialPlotNum, finalPlotNum, stepPlotNum)
+function out = cr3bp_familyPlot(c3sys, A, sortbyIndex, colorType, pltFig, initialPlotNum, finalPlotNum, stepPlotNum, opts)
 %CR3BP_FAMILYPLOT Plot Periodic Orbit Families from: @CR3BP_FAMILYNPCSTATEX 
 %
 %   Assumptions/Warnings: 
@@ -25,13 +25,60 @@ function out = cr3bp_familyPlot(c3sys, A, sortbyIndex, colorType, pltFig, initia
 %   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 %
     
-    mu = c3sys.mu;
+    arguments
+        c3sys;
+        A;
+        sortbyIndex;
+        colorType;
+        pltFig;
+        initialPlotNum;
+        finalPlotNum;
+        stepPlotNum;
+        opts.plotDim = false;
+    end
+
+    options = odeset('reltol',1e-13,'abstol',1e-13);
+
     
-    minval = min(A(:,sortbyIndex));
-    maxval = max(A(:,sortbyIndex));
+    mu = c3sys.mu;
+
+
+    if opts.plotDim
+        if sortbyIndex == 7
+            A(:,7) = A(:,7) .* (c3sys.T / (2*pi));
+            A(:,7) = A(:,7) ./ 86400;
+        end
+        if sortbyIndex == 0
+            A(:,end+1) = (c3sys.b2(1) - A(:,1)).*c3sys.L;
+        end
+    end
+
+    if opts.plotDim
+        if sortbyIndex == 0
+            minval = min(A(:,end));
+            maxval = max(A(:,end));
+        else
+            minval = min(A(:,sortbyIndex));
+            maxval = max(A(:,sortbyIndex));
+        end
+    else
+        minval = min(A(:,sortbyIndex));
+        maxval = max(A(:,sortbyIndex));
+    end
+    
+
     
     % Normalize Sort Index Values to 0-1 Scale
-    B = A(:,sortbyIndex);
+    if opts.plotDim
+        if sortbyIndex == 0
+            B = A(:,end);
+        else
+            B = A(:,7);
+        end
+    else
+        B = A(:,sortbyIndex);
+    end
+
     B = B-minval;
     B = (1/max(B)).*B;
     
@@ -79,39 +126,77 @@ function out = cr3bp_familyPlot(c3sys, A, sortbyIndex, colorType, pltFig, initia
         cbarName = 'Initial State (Y) (ND)';
     elseif sortbyIndex == 1
         cbarName = 'Initial State (X) (ND)';
+    elseif sortbyIndex == 0
+        cbarName = 'Amplitude w.r.t Moon (km)';
     end
     
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     % Create Figure
     if pltFig
-        ft = tiledlayout(1,1,'Tilespacing','compact','Padding','compact');
-        %title(ft, 'Lyapunov Periodic Orbit Family | Earth-Moon $L_1$', ...
-        %    'fontsize',14,'interpreter','latex');
-        
-        hold on
-        scatter3(c3sys.b1(1),c3sys.b1(2),c3sys.b1(3),'b','filled');
-        scatter3(c3sys.b2(1),c3sys.b2(2),c3sys.b2(3),'k','filled');
-        scatter3(c3sys.L1(1),c3sys.L1(2),c3sys.L1(3),'d','r','filled');
-        scatter3(c3sys.L2(1),c3sys.L2(2),c3sys.L2(3),'d','r','filled');
-        scatter3(c3sys.L3(1),c3sys.L3(2),c3sys.L3(3),'d','r','filled');
-        scatter3(c3sys.L4(1),c3sys.L4(2),c3sys.L4(3),'d','r','filled');
-        scatter3(c3sys.L5(1),c3sys.L5(2),c3sys.L5(3),'d','r','filled');
-        
-        options = odeset('reltol',1e-13,'abstol',1e-13);
-        for i=initialPlotNum:stepPlotNum:finalPlotNum
-            [~ ,xx] = ode113(@(t,Y) eomCR3BP(t,Y,mu), [0 A(i,8)], A(i,2:7).', options);
-            plot3( xx(:,1), xx(:,2), xx(:,3),'linewidth',1.5,'color',colorIndex(i,1:3));
+        if ~opts.plotDim
+            ft = tiledlayout(1,1,'Tilespacing','compact','Padding','compact');
+            %title(ft, 'Lyapunov Periodic Orbit Family | Earth-Moon $L_1$', ...
+            %    'fontsize',14,'interpreter','latex');
+            
+            hold on
+            scatter3(c3sys.b1(1),c3sys.b1(2),c3sys.b1(3),'b','filled');
+            scatter3(c3sys.b2(1),c3sys.b2(2),c3sys.b2(3),'k','filled');
+            scatter3(c3sys.L1(1),c3sys.L1(2),c3sys.L1(3),'d','r','filled');
+            scatter3(c3sys.L2(1),c3sys.L2(2),c3sys.L2(3),'d','r','filled');
+            scatter3(c3sys.L3(1),c3sys.L3(2),c3sys.L3(3),'d','r','filled');
+            scatter3(c3sys.L4(1),c3sys.L4(2),c3sys.L4(3),'d','r','filled');
+            scatter3(c3sys.L5(1),c3sys.L5(2),c3sys.L5(3),'d','r','filled');
+            
+            
+            for i=initialPlotNum:stepPlotNum:finalPlotNum
+                [~ ,xx] = ode113(@(t,Y) eomCR3BP(t,Y,mu), [0 A(i,8)], A(i,2:7).', options);
+                plot3( xx(:,1), xx(:,2), xx(:,3),'linewidth',1.5,'color',colorIndex(i,1:3));
+            end
+            hold off 
+            
+            cb = colorbar;
+            caxis([minval maxval]);
+            ylabel(cb,cbarName,'fontsize',16,'interpreter','Latex'); 
+            
+            grid on; box on; axis equal; set(gcf,'color','w');
+            xlabel('X (ND)','fontsize',16,'interpreter','Latex');
+            ylabel('Y (ND)','fontsize',16,'interpreter','Latex');
+            zlabel('Z (ND)','fontsize',16,'interpreter','Latex');
+        else
+            ft = tiledlayout(1,1,'Tilespacing','compact','Padding','compact');
+            b1 = c3sys.b1(1:3).*c3sys.L;
+            b2 = c3sys.b2(1:3).*c3sys.L;
+            L1 = c3sys.L1(1:3).*c3sys.L;
+            L2 = c3sys.L2(1:3).*c3sys.L;
+            L3 = c3sys.L3(1:3).*c3sys.L;
+            L4 = c3sys.L4(1:3).*c3sys.L;
+            L5 = c3sys.L5(1:3).*c3sys.L;
+
+            hold on;
+            scatter3(b1(1),b1(2),b1(3),'b','filled');
+            scatter3(b2(1),b2(2),b2(3),'k','filled');
+            scatter3(L1(1),L1(2),L1(3),'d','r','filled');
+            scatter3(L2(1),L2(2),L2(3),'d','r','filled');
+            scatter3(L3(1),L3(2),L3(3),'d','r','filled');
+            scatter3(L4(1),L4(2),L4(3),'d','r','filled');
+            scatter3(L5(1),L5(2),L5(3),'d','r','filled');
+            
+            for i=initialPlotNum:stepPlotNum:finalPlotNum
+                [~ ,xx] = ode113(@(t,Y) eomCR3BP(t,Y,mu), [0 A(i,8)], A(i,2:7).', options);
+                plot3( xx(:,1).*c3sys.L, xx(:,2).*c3sys.L, xx(:,3).*c3sys.L,'linewidth',1.5,'color',colorIndex(i,1:3));
+            end
+            hold off;
+
+            cb = colorbar;
+            caxis([minval maxval]);
+            ylabel(cb,cbarName,'fontsize',16,'interpreter','Latex'); 
+            
+            grid on; box on; axis equal; set(gcf,'color','w');
+            xlabel('X (km)','fontsize',16,'interpreter','Latex');
+            ylabel('Y (km)','fontsize',16,'interpreter','Latex');
+            zlabel('Z (km)','fontsize',16,'interpreter','Latex');
+
         end
-        hold off 
-        
-        cb = colorbar;
-        caxis([minval maxval]);
-        ylabel(cb,cbarName,'fontsize',16,'interpreter','Latex'); 
-        
-        grid on; box on; axis equal; set(gcf,'color','w');
-        xlabel('X (ND)','fontsize',16,'interpreter','Latex');
-        ylabel('Y (ND)','fontsize',16,'interpreter','Latex');
-        zlabel('Z (ND)','fontsize',16,'interpreter','Latex');
     end
     
     

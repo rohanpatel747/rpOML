@@ -78,8 +78,8 @@ function broadsearch_plot(out)
             ti = leg(1,:);
             tf = leg(end,:);
             
-            broadsearch_plotTraj([out.seq(i);out.seq(i+1)],[ti(2); ti(3)],out.mu,out.pcd,'r')
-            broadsearch_plotTraj([out.seq(i);out.seq(i+1)],[tf(2); tf(3)],out.mu,out.pcd,'b')
+            broadsearch_plotTraj([out.seq(i);out.seq(i+1)],[ti(2); ti(3)],out.mu,out.pcd,'r',true,out.ephemType)
+            broadsearch_plotTraj([out.seq(i);out.seq(i+1)],[tf(2); tf(3)],out.mu,out.pcd,'b',true,out.ephemType)
      
         end
         hold off

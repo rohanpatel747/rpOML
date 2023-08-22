@@ -1,2 +1,8 @@
 
 *.asv
+.DS_Store
+_notmine/lambert.m
+_notmine/lambert_LancasterBlanchard.m
+_notmine/LancasterBlanchard.m
+_notmine/minmax_distances.m
+_notmine/sigmax.m

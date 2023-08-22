@@ -3,7 +3,7 @@ function out = conv_ele2state(aeiowta, mu, isDeg, displayOut)
 %   Detailed explanation goes here
 
     if isDeg
-       aeiowta(3:6) = aeiowta(3:6)*(pi/180);
+       aeiowta(3:6) = aeiowta(3:6).*(pi/180);
     end
     
     a = aeiowta(1); 

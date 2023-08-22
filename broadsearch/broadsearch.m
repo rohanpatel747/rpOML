@@ -178,13 +178,13 @@ function out = broadsearch(in)
     for i=1:length(times)-1
         nLambertEst = nLambertEst + (length(times{i})*length(times{i+1}));
     end
-    if verbose
+    %if verbose
         disp(' ');
         disp(' ');
         disp(['Lambert Arcs Process']);
         disp(['    Number of Arcs To Compute: ',num2str(nLambertEst)]);
         disp('    Starting Lambert Calculations:');
-    end
+    %end
 
 
     dataTrajUF = struct;
@@ -382,7 +382,8 @@ function out = broadsearch(in)
     else
         disp('Unable to patch trajectory and output results. Error flag thrown.')
         disp('Returning Individual Leg Data.')
-        out.error = true;
+        out.error      = true;
+        out.forceplot  = true;
     end
 
     
